@@ -42,7 +42,7 @@ npm run dev -- --host 127.0.0.1
 
 ## Docker / PostgreSQL
 
-Mac 开发继续使用上面的本地运行方式，不需要安装 Docker Desktop。容器构建与 Compose 集成由 GitHub Actions Linux Runner 验证，详见 [CI 运行说明](docs/CI.md)。当前容器功能仍为 **UNVERIFIED**，以目标提交的实际 CI 成功记录为准。
+Mac 开发继续使用上面的本地运行方式，不需要安装 Docker Desktop。容器构建与 Compose 集成由 GitHub Actions Linux Runner 验证，详见 [CI 运行说明](docs/CI.md)。Linux CI已实际通过首次容器构建/集成验收，证据见 [CI_RESULT](docs/CI_RESULT.json)。Mac本地容器仍为 **UNVERIFIED / 未执行**；后续提交以其实际CI结果为准。
 
 已有 Docker 的 Linux/其他环境可在项目目录运行：
 

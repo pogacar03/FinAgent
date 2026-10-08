@@ -2,7 +2,7 @@
 
 验收日期：2026-10-08，Asia/Shanghai。项目：`/Users/yu/Desktop/FinAgent/finagent_codex_starter`。
 
-**离线 DEMO MVP 已实现并通过本地应用、数据库、浏览器与测试验收。REAL 的输入验证和执行链路通过离线测试；真实市场/模型调用、真实业绩以及 Docker 启动未验证。** 每项状态来自实际代码与执行结果，不能把未执行项视为通过。
+**离线 DEMO MVP 已实现并通过本地应用、数据库、浏览器与测试验收。REAL 的输入验证和执行链路通过离线测试；真实市场/模型调用、真实业绩未验证。后续Linux CI已实际验证Docker启动；Mac本地Docker仍未执行，详见末尾CI记录。** 每项状态来自实际代码与执行结果，不能把未执行项视为通过。
 
 ## 实际实现
 
@@ -65,13 +65,13 @@ SQLite E2E run：`c0c74fac-af67-4215-a621-42cbe6c65751`；PG E2E run：`f5654ecb
 
 ## 可运行入口与交付位置
 
-当前保留最新本地API8000、worker、前端5173，打开 <http://127.0.0.1:5173>。完整安装/三终端/Compose命令见 [README](../README.md)。重启和复验不需要聊天上下文。代码在本地feature分支 `codex/finagent-parallel` 工作树；本机Git作者身份未配置，未伪造身份或声称提交。
+当前保留最新本地API8000、worker、前端5173，打开 <http://127.0.0.1:5173>。完整安装/三终端/Compose命令见 [README](../README.md)。重启和复验不需要聊天上下文。代码在本地feature分支 `codex/finagent-parallel` 工作树；首次本地交付时Git作者未配置；后续通过已认证GitHub API真实提交，未伪造本地作者。
 
 原始包未包含 `CODEX_PARALLEL_START.md`，在项目/Desktop搜索后由architect依据用户指令及V2生成明确标注的替代文件；无法声称执行未提供的原始内容。
 
 ## 未执行、缺失与范围限制
 
-- **Docker验收门槛尚未验证**：本机未安装Docker，未执行 `docker compose up --build`。四服务文件已交付并静态解析；其等价本地PostgreSQL/HTTP/worker路径实际运行。不能据此宣称容器启动门槛已满足。
+- **Mac本地Docker：UNVERIFIED/未执行**。首次交付只有静态解析与本地PG证据；后续真实Linux CI已验证镜像/四服务启动/集成（见末尾）。无需安装Docker Desktop。
 - 未提供真实行情/历史Universe/财务原文/公司行动、模型密钥或可核验SA原始名单。REAL接口以用户sealed bundle及声明为入口，不独立认证声明；离线REAL测试使用明确虚构fixture，无真实收益结论。
 - SEC原始申报元数据适配器已实现并离线测；实时获取未执行。历史财务取值需要原始PIT输入，今天Company Facts不替代历史。
 - DEMO会话为工作日合成日历（包括可能真实休市的日期）。REAL依赖输入SPY会话、原始价格及完整动作覆盖；系统不独立认证交易所/退市覆盖。动量使用原始价格代理并披露口径；不可冒充正式已验证SA Quant评级。
@@ -88,4 +88,4 @@ SQLite E2E run：`c0c74fac-af67-4215-a621-42cbe6c65751`；PG E2E run：`f5654ecb
 
 新增 `.github/workflows/ci.yml`、`scripts/ci/docker_check.sh`、`scripts/ci/compose_smoke.py`、`tests/test_ci.py` 和 [CI运行说明](CI.md)。工作流覆盖Python测试、前端构建、Linux Docker镜像与Compose/API/Worker/PostgreSQL集成；失败收集日志、上传证据、返回非零。聚合CI verdict只在全部真实job成功时认定该SHA的Linux容器VERIFIED。此前本地开发命令继续可用，无需安装Docker Desktop。
 
-CI执行状态：**UNVERIFIED / NOT_RUN**。本地没有Docker且仓库没有GitHub remote，未提供实际Actions run URL；尚未触发远端CI。脚本mock测试/本地E2E不能改变此状态。核心业务源码、前端源码、现有Dockerfiles/Compose/Makefile未改，按本轮开始前后SHA256比较确认。最新追加测试证据和复审见执行日志；上文98项是原交付时的历史测试结果。
+CI执行状态：**VERIFIED（Linux，SHA5aad5e0cbf2f587485214553a45f7d17238cc538）**。用户提供GitHub仓库后，已上传独立分支并创建[PR#1](https://github.com/pogacar03/FinAgent/pull/1)，[push CI](https://github.com/pogacar03/FinAgent/actions/runs/37791876438)与[PR CI](https://github.com/pogacar03/FinAgent/actions/runs/37791940279)均success；Python113项通过、前端、Docker构建、Compose真实集成和CI verdict通过。实际PG有20报告/20checkpoint threads/84审计。详见[CI_RESULT](CI_RESULT.json)。**Mac本地仍UNVERIFIED/未执行**；本地mock/E2E未用于替代容器证据。核心业务源码、前端源码、现有Dockerfiles/Compose/Makefile未改，按本轮开始前后SHA256比较确认。最新追加测试证据和复审见执行日志；上文98项是原交付时的历史测试结果。

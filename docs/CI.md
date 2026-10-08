@@ -9,7 +9,8 @@
 - 前端：`npm ci`、`npm run check:provenance`、`npm run build` 均 exit0；TypeScript + Vite8.3.4 build通过。
 - 本地独立进程 E2E：`.venv/bin/python scripts/e2e_demo.py` exit0；10只、3角色、worker重启、同窗合成回测、SA缺失null/UNAVAILABLE。
 - 工作流 YAML 结构、`bash -n`、Python编译验证通过；官方actionlint1.7.12（release SHA256已核验；未启用可选ShellCheck）exit0。独立Sol High复审未发现阻塞缺陷。
-- **Docker 镜像构建 / Compose 启动 / 容器集成：UNVERIFIED。** 本机没有Docker，初始仓库没有GitHub remote；用户随后提供 `pogacar03/FinAgent`，已配置origin，正在准备独立分支运行，尚无成功Actions证据。没有将本地测试或mock测试算作Linux容器成功。
+- **Linux Docker 镜像构建 / Compose 启动 / 容器集成：VERIFIED**（已验证SHA `5aad5e0cbf2f587485214553a45f7d17238cc538`）。[push CI](https://github.com/pogacar03/FinAgent/actions/runs/37791876438)及[PR CI](https://github.com/pogacar03/FinAgent/actions/runs/37791940279)均真实success。Python113项通过（Linux9.40s），前端和CI verdict通过。详细证据见 [CI_RESULT.json](CI_RESULT.json)。
+- **Mac本地容器：UNVERIFIED / 未执行。** 没有安装Docker；本地测试/mock不作为容器证据。
 
 ## 工作流入口
 
@@ -51,7 +52,7 @@ Python job上传JUnit和E2E报告。未生成报告不会伪造成功文件。Ru
 
 ## 如何运行和认定通过
 
-将完整项目及工作流提交到既定GitHub仓库后，push/PR会自动触发。在GitHub **Actions → FinAgent CI → Run workflow** 可选择分支手动运行。仓库已确定为 [pogacar03/FinAgent](https://github.com/pogacar03/FinAgent)。提交时如果尚无成功运行证据，仍按UNVERIFIED处理；实际结果以Actions和STATUS中的目标SHA记录为准。
+将完整项目及工作流提交到既定GitHub仓库后，push/PR会自动触发。当前PR分支的push/PR已自动运行。PR合并到默认分支main后，才会按GitHub规则显示并支持 **Actions → FinAgent CI → Run workflow** 手动运行；可选择分支。仓库已确定为 [pogacar03/FinAgent](https://github.com/pogacar03/FinAgent)。提交时如果尚无成功运行证据，仍按UNVERIFIED处理；实际结果以Actions和STATUS中的目标SHA记录为准。
 
 已有GitHub CLI且仓库已配置时，也可执行：
 
@@ -72,3 +73,9 @@ gh run download <RUN_ID> --name docker-evidence-<RUN_ID>-<RUN_ATTEMPT>
 - [GitHub Python测试工作流](https://docs.github.com/en/actions/tutorials/build-and-test-code/python)
 - [Ubuntu24.04 Runner 软件清单](https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md)：包含Docker及Compose；脚本仍实际检查工具存在。
 - [Docker Compose等待选项](https://docs.docker.com/reference/cli/docker/compose/up/)、[Compose全局progress选项](https://docs.docker.com/reference/cli/docker/compose/)
+
+## 首次真实Linux结果
+
+研究run `68cfcdc0-af49-4080-b3a9-39e00501a138`，回测 `c6ac6f4d-e891-42b2-8af8-c902223c0aee`。真实容器PG保存20份研究、20个原生checkpoint thread、84条审计、1份Universe；10只冻结名单、3角色、worker重启、nginx代理、同窗合成回测均通过。push/PR两次运行均成功；PR使用GitHub测试merge SHA，与head SHA分别记录。容器日志/清理/JSON artifact已上传，7天保留。
+
+手动触发默认分支要求见[GitHub官方说明](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)。已下载实际Docker artifact，SHA256与GitHub元数据相符，ZIP包含compose状态、容器日志、清理日志与integration.json；实际清理成功。
