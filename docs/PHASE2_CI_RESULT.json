@@ -1,0 +1,126 @@
+{
+  "source_commit": "2d65d868c3c74a782f99147c1feac6323c109a70",
+  "baseline_commit": "1bcedb6fc8374a09748d26fbb10b6e4ff5537c21",
+  "linux_container_status": "PASSED",
+  "mac_container_status": "UNVERIFIED_NOT_RUN",
+  "push_run": {
+    "id": 37877192941,
+    "url": "https://github.com/pogacar03/FinAgent/actions/runs/37877192941",
+    "conclusion": "success"
+  },
+  "pr_run": {
+    "id": 37877216469,
+    "url": "https://github.com/pogacar03/FinAgent/actions/runs/37877216469",
+    "conclusion": "success",
+    "head_sha": "2d65d868c3c74a782f99147c1feac6323c109a70"
+  },
+  "jobs": [
+    {
+      "id": 113648385871,
+      "name": "Frontend typecheck and build",
+      "conclusion": "success"
+    },
+    {
+      "id": 113648386044,
+      "name": "Python offline tests",
+      "conclusion": "success"
+    },
+    {
+      "id": 113648575490,
+      "name": "Linux Docker and Compose integration",
+      "conclusion": "success"
+    },
+    {
+      "id": 113648872817,
+      "name": "CI verdict",
+      "conclusion": "success"
+    }
+  ],
+  "linux_python_result": "149 passed in 10.78s",
+  "local_python_result": "149 passed in 7.16s",
+  "frontend_result": "PASSED_TYPECHECK_BUILD_PROVENANCE",
+  "integration": {
+    "status": "CHECKS_PASSED",
+    "label": "DEMO / SYNTHETIC",
+    "commit": "2d65d868c3c74a782f99147c1feac6323c109a70",
+    "github_run_id": "37877192941",
+    "run_id": "9515ebbf-9c01-427a-94ca-5769115c6139",
+    "backtest_id": "c56f67e6-18bf-48bb-8220-6950f5dd6579",
+    "database": "postgresql",
+    "durable_evidence": {
+      "run_status": "COMPLETED",
+      "backtest_status": "COMPLETED",
+      "research_reports": 20,
+      "universe_artifacts": 1,
+      "checkpoint_threads": 20,
+      "audit_events": 85
+    },
+    "observability": {
+      "status": "PASSED",
+      "label": "ACTUAL_SDK_DEMO_NO_LLM",
+      "trace_id": "4b6ff7dc67124033fdc8f724ff5bb4f3",
+      "span_count": 105,
+      "stages": [
+        "Evidence Verification",
+        "Result Expression",
+        "State Management",
+        "Task Planning",
+        "Tool Calling"
+      ],
+      "sample": {
+        "attributes": {
+          "batch_id": "9515ebbf-9c01-427a-94ca-5769115c6139",
+          "channel": "audit_validation",
+          "checkpoint_id": "1f1c38db-96b5-6422-8004-24190c4577c7",
+          "finagent.stage": "Task Planning",
+          "langfuse.session.id": "9515ebbf-9c01-427a-94ca-5769115c6139",
+          "langfuse.trace.metadata.batch_id": "9515ebbf-9c01-427a-94ca-5769115c6139",
+          "langfuse.trace.metadata.checkpoint_id": "1f1c38db-96b5-6422-8004-24190c4577c7",
+          "langfuse.trace.metadata.run_id": "9515ebbf-9c01-427a-94ca-5769115c6139",
+          "langfuse.trace.metadata.snapshot_id": "evidence:NEE:049b3e3825195dfa",
+          "langfuse.trace.metadata.ticker": "NEE",
+          "langfuse.trace.name": "FinAgent E2E",
+          "persona_count": 3,
+          "retry_count": 0,
+          "run_id": "9515ebbf-9c01-427a-94ca-5769115c6139",
+          "snapshot_id": "evidence:NEE:049b3e3825195dfa",
+          "status": "OK",
+          "thread_id": "9515ebbf-9c01-427a-94ca-5769115c6139:NEE:049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1:personas-v1:multi_persona:NEE:evidence:NEE:049b3e3825195dfa:personas-v1:5e3f63ffd15674f1c16f",
+          "ticker": "NEE"
+        },
+        "duration_ms": 0.023235,
+        "end_time_unix_ns": 1791514889443030000,
+        "llm_metrics": {
+          "completion_tokens": null,
+          "cost_usd": null,
+          "llm_latency_ms": null,
+          "prompt_tokens": null,
+          "total_tokens": null
+        },
+        "name": "Task Planning",
+        "parent_span_id": "235d9a0b83877e33",
+        "span_id": "91e695e853056ae9",
+        "start_time_unix_ns": 1791514889443006700,
+        "status": "UNSET",
+        "trace_id": "4b6ff7dc67124033fdc8f724ff5bb4f3"
+      }
+    },
+    "picks": 10,
+    "personas": 3,
+    "worker_restart": true,
+    "frontend_proxy": true,
+    "seeking_alpha_status": "UNAVAILABLE",
+    "entry_session": "2025-07-01",
+    "exit_session": "2026-01-01"
+  },
+  "artifact": {
+    "id": 11592966272,
+    "name": "docker-evidence-37877192941-1",
+    "sha256": "508087fdeb26e4252516bc963d29f368d77a9a2dca5b2e1faa737b4c5945e730",
+    "retention_days": 7
+  },
+  "actual_llm_calls": 0,
+  "live_langfuse_status": "UNVERIFIED",
+  "real_pilot_status": "PARTIAL",
+  "scope": "Historical NVDA strict valuation/total-return UNAVAILABLE; measured benchmark is DEMO only"
+}

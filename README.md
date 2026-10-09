@@ -117,3 +117,5 @@ PYTHONPATH=backend .venv/bin/python scripts/real_data_pilot.py --replay <executi
 Worker默认向`artifacts/traces/worker.jsonl`写实际OpenTelemetry SDK spans，并在DB审计关联trace_id；可通过`FINAGENT_TRACE_PATH`改路径。`.env.example`列出可选Langfuse配置；失败按既定fail-open继续业务。在线服务和真实LLM指标尚未验证，字段和真实本地样例见[OBSERVABILITY](docs/OBSERVABILITY.md)。Compose traces位于容器`/tmp/finagent-traces/worker.jsonl`，容器删除后不保留；CI在删除前验收并保存关联样例。
 
 [Benchmark](docs/BENCHMARK.md)保留每组至少3次的原始JSON/CSV；冷启动、完成任务HTTP幂等复用、真实Worker中断恢复均为DEMO，无真实LLM调用。当前完整离线测试149项。新提交的Linux容器验收遵循[CI](docs/CI.md)，以目标SHA实际结果为准。
+
+第二阶段源码Linux CI已实际通过：[push验收](https://github.com/pogacar03/FinAgent/actions/runs/37877192941)，完整证据[PHASE2_CI_RESULT](docs/PHASE2_CI_RESULT.json)。改动在[Draft PR#2](https://github.com/pogacar03/FinAgent/pull/2)，依赖已有基线PR#1。真实数据与Langfuse外部状态仍按STATUS单独报告。

@@ -79,3 +79,10 @@ gh run download <RUN_ID> --name docker-evidence-<RUN_ID>-<RUN_ATTEMPT>
 研究run `68cfcdc0-af49-4080-b3a9-39e00501a138`，回测 `c6ac6f4d-e891-42b2-8af8-c902223c0aee`。真实容器PG保存20份研究、20个原生checkpoint thread、84条审计、1份Universe；10只冻结名单、3角色、worker重启、nginx代理、同窗合成回测均通过。push/PR两次运行均成功；PR使用GitHub测试merge SHA，与head SHA分别记录。容器日志/清理/JSON artifact已上传，7天保留。
 
 手动触发默认分支要求见[GitHub官方说明](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)。已下载实际Docker artifact，SHA256与GitHub元数据相符，ZIP包含compose状态、容器日志、清理日志与integration.json；实际清理成功。
+
+
+## 第二阶段实际Linux结果（2026-10-09）
+
+源码提交`2d65d868c3c74a782f99147c1feac6323c109a70`：[push37877192941](https://github.com/pogacar03/FinAgent/actions/runs/37877192941)、[PR37877216469](https://github.com/pogacar03/FinAgent/actions/runs/37877216469)均四job success。Linux pytest **149 passed in 10.78s**，前端tsc/Vite，Docker构建和Compose完整集成均通过。真实PG20报告/20checkpoint threads/85审计；research run `9515ebbf-9c01-427a-94ca-5769115c6139`，SDK trace `4b6ff7dc67124033fdc8f724ff5bb4f3` 105 spans，五阶段同trace且checkpoint/snapshot/ticker关联，DEMO LLM指标null。
+
+下载Docker artifact11592966272并核对ZIP SHA256 `508087fdeb26e4252516bc963d29f368d77a9a2dca5b2e1faa737b4c5945e730`；内含相同提交integration.json及容器状态/日志/成功清理。字段及样例见[PHASE2_CI_RESULT](PHASE2_CI_RESULT.json)。新源码通过不代表真实Langfuse服务或市场PIT通过；Mac Docker仍未执行。

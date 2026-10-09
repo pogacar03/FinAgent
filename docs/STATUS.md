@@ -10,7 +10,7 @@
 | PostgreSQL集成及独立API/Worker E2E | PASSED | 本地临时PG16：8并发首启、原生checkpoint、worker重启、12并发领取8唯一任务、旧租约写入拒绝；run d6bc85be-e14f-46d3-ac5e-a31ae9abaa33 |
 | SQLite独立进程E2E | PASSED | scripts/e2e_demo.py退出0，10唯一名单/3角色/冻结半年DEMO回测/重启及缺SA处理 |
 | 第一阶段Linux Docker/Compose CI | PASSED | 真实既有运行37791876438/37791940279；结果及SHA见CI_RESULT.json；后续基线1bcedb6的push37792833219与PR37792841308亦success |
-| 第二阶段新源码Linux Docker/Compose CI | UNVERIFIED | 当前准备独立phase2分支，必须等待该新SHA实际CI verdict成功；旧绿色不能证明新代码 |
+| 第二阶段新源码Linux Docker/Compose CI | PASSED | 源码SHA2d65d868：push37877192941、PR37877216469均4个job success，Linux149 tests、真实构建/四服务/PG/worker、105 spans五阶段验收；见PHASE2_CI_RESULT.json |
 | Mac本地Docker | UNVERIFIED | 未安装、未执行；保留本地SQLite/PG运行方式，不需要Docker Desktop |
 | NVDA原始发行人财务读取与日期上界校验 | PASSED | 实际原始财报HTTP200、FY2025 GAAP解析；仅保守日期边界，不表示精确时戳／不可变当年档案 |
 | 最小真实数据闭环 | PARTIAL | 固定决策2025-02-28纽约23:59:59，原始来源/响应/快照/政策算术/门控/无网络回放已实际执行 |
@@ -27,7 +27,7 @@
 ## 可复现证据
 
 - [工程基线及文件哈希](ENGINEERING_BASELINE.json)：真实Git作者Yu，未伪造本地身份；原12个测试文件与22个冻结领域／前端文件均未改。
-- [CI配置与运行说明](CI.md)、[既有真实CI证据](CI_RESULT.json)。新提交CI实际结果将独立记录，禁止混用旧SHA。
+- [CI配置与运行说明](CI.md)、[既有真实CI证据](CI_RESULT.json)、[第二阶段真实CI证据](PHASE2_CI_RESULT.json)。已核验下载artifact SHA256与相同提交integration.json；禁止混用旧SHA。
 - [真实数据与PIT报告](REAL_DATA_VALIDATION.md)：执行20261009T025343313311Z，原始响应在artifacts/real-pilot；源URL/时间/hash/重放命令已保存。
 - [追踪字段与降级](OBSERVABILITY.md)、[实际PG Worker trace样例](TRACE_SAMPLE.json)：batch_id为父research run ID；backtest拥有自己的run_id；schema v1不变。
 - [Benchmark及原始记录](BENCHMARK.md)：披露同输入/模型/环境及源码hash；每次完整观测保留，无可靠并行加速结论。
@@ -37,6 +37,6 @@
 
 主调度拆分三个独占模块，最多三个子Agent同时工作；观测模块完成后启动独立Sol High审查。真实数据Agent使用继承配置，观测请求gpt-6.1-sol/medium，Benchmark请求gpt-6-luna/max，审查请求gpt-6.1-sol/high。工具没有独立Fast开关，不能独立证明后端计费路由。实际文件、命令和问题在各角色报告与EXECUTION_LOG中。
 
-基线分支codex/ci-linux-compose仍以draft PR#1等待集成；第二阶段codex/phase2-validation基于其已验证提交。提交使用已认证GitHub API，不修改main、不伪造Git作者。原contracts/data/quant/backtest/api/config和前端未改；仅worker、storage、agents增加观测元数据，新增独立数据pilot与Benchmark工具，没有大型领域重构。首次缺失的CODEX_PARALLEL_START.md由architect生成替代文件，原始缺失事实保留。
+基线分支codex/ci-linux-compose仍以draft PR#1等待集成；第二阶段codex/phase2-validation基于其已验证提交，已创建[Draft PR#2](https://github.com/pogacar03/FinAgent/pull/2)，源码提交2d65d868c3c74a782f99147c1feac6323c109a70。提交使用已认证GitHub API，不修改main、不伪造Git作者。原contracts/data/quant/backtest/api/config和前端未改；仅worker、storage、agents增加观测元数据，新增独立数据pilot与Benchmark工具，没有大型领域重构。首次缺失的CODEX_PARALLEL_START.md由architect生成替代文件，原始缺失事实保留。
 
 DEMO价格、财务、名单、交易日历和收益路径均为SYNTHETIC。缺SA原名单保持UNAVAILABLE；历史LLM知识污染无法证明消除；单NVDA pilot没有补齐另外九只，不等同完整真实Top-10工作流。schema v1为加锁bootstrap，未来结构变动仍需版本迁移；LLM预算是每worker进程。第一阶段全部原始审查/测试记录见agent_reports与EXECUTION_LOG。
