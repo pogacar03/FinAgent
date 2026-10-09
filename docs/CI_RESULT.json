@@ -1,0 +1,49 @@
+{
+  "container_status": "VERIFIED_LINUX_CI",
+  "local_mac_container_status": "UNVERIFIED_NOT_RUN",
+  "verified_head_sha": "5aad5e0cbf2f587485214553a45f7d17238cc538",
+  "push_run": {
+    "id": 37791876438,
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "5aad5e0cbf2f587485214553a45f7d17238cc538",
+    "url": "https://github.com/pogacar03/FinAgent/actions/runs/37791876438"
+  },
+  "push_integration": {
+    "status": "CHECKS_PASSED",
+    "label": "DEMO / SYNTHETIC",
+    "commit": "5aad5e0cbf2f587485214553a45f7d17238cc538",
+    "github_run_id": "37791876438",
+    "run_id": "68cfcdc0-af49-4080-b3a9-39e00501a138",
+    "backtest_id": "c6ac6f4d-e891-42b2-8af8-c902223c0aee",
+    "database": "postgresql",
+    "durable_evidence": {
+      "run_status": "COMPLETED",
+      "backtest_status": "COMPLETED",
+      "research_reports": 20,
+      "universe_artifacts": 1,
+      "checkpoint_threads": 20,
+      "audit_events": 84
+    },
+    "picks": 10,
+    "personas": 3,
+    "worker_restart": true,
+    "frontend_proxy": true,
+    "seeking_alpha_status": "UNAVAILABLE",
+    "entry_session": "2025-07-01",
+    "exit_session": "2026-01-01"
+  },
+  "pr_run": {
+    "id": 37791940279,
+    "url": "https://github.com/pogacar03/FinAgent/actions/runs/37791940279",
+    "conclusion": "success",
+    "tested_merge_sha": "cb8c9528a052ba6c21f61b82fde5e7e99a15cdc1"
+  },
+  "python_tests": {
+    "passed": 113,
+    "runner": "ubuntu-24.04",
+    "seconds": 9.4
+  },
+  "frontend_build": "PASS",
+  "ci_verdict": "PASS"
+}

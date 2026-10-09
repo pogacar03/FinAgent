@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+*.db
+*.db-shm
+*.db-wal
+.DS_Store
+frontend/node_modules/
+frontend/dist/
+artifacts/
+docs/agent_reports/*.diff

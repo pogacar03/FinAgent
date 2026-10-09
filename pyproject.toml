@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "finagent"
+version = "0.1.0"
+description = "Auditable semiannual stock research prototype, offline synthetic demo"
+requires-python = ">=3.11"
+dependencies = ["fastapi", "uvicorn", "pydantic>=2", "sqlalchemy>=2", "psycopg[binary]", "langgraph", "langgraph-checkpoint-sqlite", "langgraph-checkpoint-postgres", "httpx", "python-dateutil"]
+
+[tool.setuptools.packages.find]
+where = ["backend"]
