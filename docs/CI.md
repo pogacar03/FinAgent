@@ -35,7 +35,7 @@
 4. `compose_smoke.py` 通过实际容器API确认PostgreSQL后端，检查已构建nginx页面与API代理。
 5. 停Worker→提交DEMO研究→确认QUEUED→启动容器Worker→等待COMPLETED；验收10个唯一标的、3角色、原生检查点审计。
 6. 再停/启Worker执行回测，确认冻结信号不变、半年同窗口、合成标签、SA不可用。
-7. 用容器内 `psql -v ON_ERROR_STOP=1` 核对真实数据库任务状态、研究报告、Universe工件、至少10个原生checkpoint thread及审计；确认Worker仍running。
+7. 用容器内 `psql -v ON_ERROR_STOP=1` 核对真实数据库任务状态、研究报告、Universe工件、至少10个原生checkpoint thread及审计；从实际Worker容器读取SDK JSONL，验证同一trace的五阶段及batch/run/ticker/snapshot/checkpoint关联、DEMO LLM指标null；确认Worker仍running。
 
 健康检查有超时，终止状态或数据库/业务断言失败会抛异常并返回非零，不使用 `continue-on-error` 掩盖失败。脚本不启动本地替代API/worker，不安装Mac Docker。
 
@@ -45,7 +45,7 @@
 
 `Upload container logs and integration evidence` 使用 `if: always()` 上传 `artifacts/docker-ci/`，保留7天：
 
-- `integration.json`：仅完整集成断言通过时生成，记录真实run_id、backtest_id、提交SHA、GitHub run_id和数据库证据；状态为CHECKS_PASSED，最终CI成功仍须看CI verdict。
+- `integration.json`：仅完整集成断言通过时生成，记录真实run_id、backtest_id、提交SHA、GitHub run_id和数据库证据和实际五阶段SDK trace样例；状态为CHECKS_PASSED，最终CI成功仍须看CI verdict。
 - `compose-ps.json`、`compose.log`、`cleanup.log`：容器状态、运行日志、清理结果。
 
 Python job上传JUnit和E2E报告。未生成报告不会伪造成功文件。Runner被强制终止时trap/artifact可能无法执行；GitHub job仍失败/取消，不能标记VERIFIED。

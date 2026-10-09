@@ -1,91 +1,42 @@
-# FinAgent 实际交付状态
+# FinAgent 当前验收状态（2026-10-09）
 
-验收日期：2026-10-08，Asia/Shanghai。项目：`/Users/yu/Desktop/FinAgent/finagent_codex_starter`。
+第二阶段工程实现已集成；真实数据闭环为 PARTIAL。所有状态基于源码审查、实际命令输出或指定 GitHub Actions 运行，不以本文件本身证明通过。
 
-**离线 DEMO MVP 已实现并通过本地应用、数据库、浏览器与测试验收。REAL 的输入验证和执行链路通过离线测试；真实市场/模型调用、真实业绩未验证。后续Linux CI已实际验证Docker启动；Mac本地Docker仍未执行，详见末尾CI记录。** 每项状态来自实际代码与执行结果，不能把未执行项视为通过。
-
-## 实际实现
-
-| 模块 | 实现与证据 | 状态 |
+| 范围 | 状态 | 实际证据／缺口 |
 |---|---|---|
-| 架构与 Schema | 深度不可变 Pydantic contracts、哈希、时间/证据/名单约束；14 contract tests | 已实现 |
-| 后端 API | 提交/查询/历史/个股/审计/回测/核验榜单；OpenAPI；请求冲突409、畸形导入422 | 已实现 |
-| 持久化 worker | 独立进程、PostgreSQL SKIP LOCKED、随机租约 fencing、心跳、过期接管、有限重试、不可变工件 | 已实现并验证 |
-| 首次启动 | PG 同连接事务 advisory lock；8个同时初始化无DDL竞态；SQLite串行 bootstrap | 已验证 |
-| 数据与 PIT | DEMO显式SYNTHETIC；REAL sealed bundle、原始来源、可用时点、用户核验声明；无依赖时不可用 | 已实现；真实覆盖待提供 |
-| 量化筛选 | 明确缺项、最少有效因子、至多30、确定性排名、行业上限、十只等权、不足不填充 | 已实现并验证 |
-| Multi-Agent | 实际 LangGraph fan-out/fan-in，三个私有上下文、只读证据、结构化汇总、最多一轮复核 | 已实现并验证 |
-| 消融 | quant_only / single_agent_skills / multi_persona / multi_persona_debate | 已实现并验证 |
-| 模型访问 | OpenAI-compatible HTTP结构化预测、Python计算估值、匿名证据、有限重试、跨股票共享并发/频率预算 | 离线模拟已验证；真实调用待密钥 |
-| 估值与入场 | FACT与Assumption分开，EPS×PE及受限DCF，50/30/20，安全边际；NVDA199/159.20合成例 | 已实现并验证 |
-| 原生检查点 | SQLite/PostgreSQL官方异步 saver，分支恢复、已完成个股复用、模型/版本/输入身份固定 | 已实现并验证 |
-| 半年回测 | 下一合格NY开盘，六日历月，同一窗口，拆股/分红/现金/成本/滑点；未成熟PENDING | 已实现并验证 |
-| 限价次实验 | 等待期拆股调整，包括晚SA公布前动作；未成交现金与同信号机会成本 | 已实现并验证 |
-| 回测数据版本 | 每次评估固定执行bundle；允许未来新增记录，拒绝改写原决策Universe/入选股票输入；不重做LLM | 已实现并验证 |
-| SA榜单 | Bearer导入、来源/发布时间/10只验证、单独核验声明、追加修订、回测固定版本、缺失为null/UNAVAILABLE | 已实现；原始榜单未提供 |
-| 跨期汇总 | Python聚合有效/缺失期、胜率、超额百分点、观察窗口NAV和期末回撤，混合/重叠/重复拒绝 | 已实现并单测；未提供真实跨期样本 |
-| 中文前端 | 提交/进度/历史、Top10、角色报告/证据/假设、图表、PIT/合成标签、固定SA来源、审计 | 实际浏览器验收通过 |
-| 审计 | 带ID/时间的Plan/Tools/State/Evidence/Output与实际checkpoint身份；不保存原始提示/密钥 | 已实现并E2E验证 |
+| 原有工程基线、全部原有约束 | PASSED | 原交付98测试及后续15 CI guards原文件完全未改；重新独立运行113通过，基线提交1bcedb6 |
+| 当前完整Python离线测试 | PASSED | 主调度实际149 passed in 7.16s；独立复审149 passed in 7.31s；没有跳过测试 |
+| 前端类型检查、生产构建、来源检查 | PASSED | npm run check:provenance 与 npm run build（包含tsc --noEmit）退出0；前端源文件未改 |
+| PostgreSQL集成及独立API/Worker E2E | PASSED | 本地临时PG16：8并发首启、原生checkpoint、worker重启、12并发领取8唯一任务、旧租约写入拒绝；run d6bc85be-e14f-46d3-ac5e-a31ae9abaa33 |
+| SQLite独立进程E2E | PASSED | scripts/e2e_demo.py退出0，10唯一名单/3角色/冻结半年DEMO回测/重启及缺SA处理 |
+| 第一阶段Linux Docker/Compose CI | PASSED | 真实既有运行37791876438/37791940279；结果及SHA见CI_RESULT.json；后续基线1bcedb6的push37792833219与PR37792841308亦success |
+| 第二阶段新源码Linux Docker/Compose CI | UNVERIFIED | 当前准备独立phase2分支，必须等待该新SHA实际CI verdict成功；旧绿色不能证明新代码 |
+| Mac本地Docker | UNVERIFIED | 未安装、未执行；保留本地SQLite/PG运行方式，不需要Docker Desktop |
+| NVDA原始发行人财务读取与日期上界校验 | PASSED | 实际原始财报HTTP200、FY2025 GAAP解析；仅保守日期边界，不表示精确时戳／不可变当年档案 |
+| 最小真实数据闭环 | PARTIAL | 固定决策2025-02-28纽约23:59:59，原始来源/响应/快照/政策算术/门控/无网络回放已实际执行 |
+| 原始SEC 10-K适配、本次读取 | BLOCKED | 缺可识别联系人SEC_USER_AGENT；未伪造身份；本次使用NVIDIA原始公告 |
+| 严格历史估值及含公司行动半年总回报 | BLOCKED | Nasdaq历史价格200但0记录，原始可用性及动作完整覆盖缺失；结果UNAVAILABLE/null |
+| 历史价格PIT、公司行动完整性、精确发布时间 | UNVERIFIED | Yahoo二级报价仅价格诊断；Nasdaq观察股息不等于完整行动证明；没有升级REAL attestation |
+| 可信历史分析师一致预期／全估值法 | BLOCKED | 未取得可信PIT预测；仅明确假设的窄PE算术，不强行DCF |
+| 五阶段OpenTelemetry E2E、本地隐私与故障降级 | PASSED | 实际PG research trace 6089cc0da86f41ebd80b16d554edc35f，105 spans；9 SDK测试；源码白名单，不导出prompt/key/原文 |
+| Langfuse集成 | PARTIAL | 官方OTLP HTTP exporter及配置已接线，有限队列／fail-open；未提供有效服务凭据 |
+| Langfuse在线ingestion/UI、真实LLM指标 | UNVERIFIED | 0真实LLM调用；Token、费用、LLM latency为null；mock验证不能升级在线状态 |
+| 串行／有界并行DEMO Benchmark | PASSED | 最终原始JSON/CSV保留，每种策略×冷启动/HTTP幂等复用/真实中断恢复×3；18观测、0失败 |
+| 真实LLM性能及真实投资结果 | UNVERIFIED | 当前离线指标不代表LLM加速、成本节省或Alpha；没有可信真实总回报 |
 
-## 最新验收结果
+## 可复现证据
 
-以下命令均从项目目录运行，前端命令从 `frontend/` 运行。
+- [工程基线及文件哈希](ENGINEERING_BASELINE.json)：真实Git作者Yu，未伪造本地身份；原12个测试文件与22个冻结领域／前端文件均未改。
+- [CI配置与运行说明](CI.md)、[既有真实CI证据](CI_RESULT.json)。新提交CI实际结果将独立记录，禁止混用旧SHA。
+- [真实数据与PIT报告](REAL_DATA_VALIDATION.md)：执行20261009T025343313311Z，原始响应在artifacts/real-pilot；源URL/时间/hash/重放命令已保存。
+- [追踪字段与降级](OBSERVABILITY.md)、[实际PG Worker trace样例](TRACE_SAMPLE.json)：batch_id为父research run ID；backtest拥有自己的run_id；schema v1不变。
+- [Benchmark及原始记录](BENCHMARK.md)：披露同输入/模型/环境及源码hash；每次完整观测保留，无可靠并行加速结论。
+- [独立复审](agent_reports/phase2_reviewer.md)：复现两个新工具缺陷、交回原责任Agent修复、独立重测；无剩余具体源码阻断项。
 
-| 命令/检查 | 实际结果 |
-|---|---|
-| `.venv/bin/python -m pytest -q` | **98 passed in 4.95s**，无失败/跳过 |
-| `npm ci` | exit0，锁定依赖安装成功 |
-| `npm run check:provenance` | 固定SA、显式无榜单、旧缺字段/缺payload案例通过 |
-| `npm run build` | TypeScript `--noEmit` + Vite8.3.4生产构建通过 |
-| `npm audit` | **0 vulnerabilities** |
-| `.venv/bin/python scripts/e2e_demo.py` | SQLite：独立HTTP/worker、真实图、10只、3角色、worker重启、半年合成回测、SA不可用；exit0 |
-| `.venv/bin/python scripts/postgres_smoke.py` | 独立PG16临时集群：8并发首次启动、原生checkpoint、HTTP/worker重启、12竞争worker唯一领取8任务、旧租约写入拒绝；exit0 |
-| `.venv/bin/python -m compileall -q backend scripts tests` | exit0 |
-| Compose YAML解析/环境合并/容器数据路径 | 静态验证通过；未运行容器 |
-| `git diff --check` | exit0 |
-| 实际浏览器 | 点击提交→完成→10只→NVDA三报告→回测；520/1280视口检查；最新代码重启后恢复结果与固定来源提示 |
+## 调度、Git与范围
 
-SQLite E2E run：`c0c74fac-af67-4215-a621-42cbe6c65751`；PG E2E run：`f5654ecb-f75f-415a-8a81-27b46d927aa5`。DEMO样例仅验证工程链路，不代表投资优势。最终截图：`artifacts/finagent-final.jpg`；E2E JSON：`artifacts/e2e_report.json`（每次脚本执行覆盖）。
+主调度拆分三个独占模块，最多三个子Agent同时工作；观测模块完成后启动独立Sol High审查。真实数据Agent使用继承配置，观测请求gpt-6.1-sol/medium，Benchmark请求gpt-6-luna/max，审查请求gpt-6.1-sol/high。工具没有独立Fast开关，不能独立证明后端计费路由。实际文件、命令和问题在各角色报告与EXECUTION_LOG中。
 
-原先审查的八项问题和最终复审的六项问题均已定向修复，详见 [最终审查报告](agent_reports/final_reviewer.md)。关键修复均有先失败后通过的回归证据：幂等重试、未来执行数据、PG首启、动作PIT、等待期限价拆股、共享HTTP预算。
+基线分支codex/ci-linux-compose仍以draft PR#1等待集成；第二阶段codex/phase2-validation基于其已验证提交。提交使用已认证GitHub API，不修改main、不伪造Git作者。原contracts/data/quant/backtest/api/config和前端未改；仅worker、storage、agents增加观测元数据，新增独立数据pilot与Benchmark工具，没有大型领域重构。首次缺失的CODEX_PARALLEL_START.md由architect生成替代文件，原始缺失事实保留。
 
-## 实际子 Agent 调度
-
-| 角色 | 实际工具请求模型 / effort | 任务与提交 |
-|---|---|---|
-| architect | gpt-6.1-sol / high | 冻结接口、数据库/状态机/验收；真实contracts+14测试+文档 |
-| data_engineer | gpt-6-luna / max | provider代码、PIT/动作/榜单、测试、问题清单；随后定向修复 |
-| agent_engineer | gpt-6.1-sol / medium | 原生graph、隔离/复核/恢复、共享预算、测试、问题清单 |
-| frontend_engineer | gpt-6-luna / max | 中文UI、API、来源、依赖修复、构建/审计、问题清单 |
-| quant_engineer | gpt-6.1-sol / high | 筛选/估值/冻结/回测、拆股等待修复、测试、问题清单 |
-| backend_reviewer | gpt-6.1-sol / high | 独立源码审查、真实复现、定向复测和最终审查报告 |
-| 主调度 root | 当前会话模型，由宿主配置 | 管理依赖/文件所有权、API/DB/worker、集成、故障注入、PG/浏览器/E2E、文档 |
-
-架构先完成，再按依赖分批编码；最多同时三个子Agent，所有文件按归属编辑。没有独立Fast开关，未声称设置Fast；工具请求模型不等于可独立核验的后台计费路由。详见 [执行日志](EXECUTION_LOG.md) 和 [各角色报告](agent_reports/)。
-
-## 可运行入口与交付位置
-
-当前保留最新本地API8000、worker、前端5173，打开 <http://127.0.0.1:5173>。完整安装/三终端/Compose命令见 [README](../README.md)。重启和复验不需要聊天上下文。代码在本地feature分支 `codex/finagent-parallel` 工作树；首次本地交付时Git作者未配置；后续通过已认证GitHub API真实提交，未伪造本地作者。
-
-原始包未包含 `CODEX_PARALLEL_START.md`，在项目/Desktop搜索后由architect依据用户指令及V2生成明确标注的替代文件；无法声称执行未提供的原始内容。
-
-## 未执行、缺失与范围限制
-
-- **Mac本地Docker：UNVERIFIED/未执行**。首次交付只有静态解析与本地PG证据；后续真实Linux CI已验证镜像/四服务启动/集成（见末尾）。无需安装Docker Desktop。
-- 未提供真实行情/历史Universe/财务原文/公司行动、模型密钥或可核验SA原始名单。REAL接口以用户sealed bundle及声明为入口，不独立认证声明；离线REAL测试使用明确虚构fixture，无真实收益结论。
-- SEC原始申报元数据适配器已实现并离线测；实时获取未执行。历史财务取值需要原始PIT输入，今天Company Facts不替代历史。
-- DEMO会话为工作日合成日历（包括可能真实休市的日期）。REAL依赖输入SPY会话、原始价格及完整动作覆盖；系统不独立认证交易所/退市覆盖。动量使用原始价格代理并披露口径；不可冒充正式已验证SA Quant评级。
-- 历史LLM训练记忆污染无法证明消除，回放冻结时间是模型决策时点，实际执行时间在审计记录中；不得宣称真实前瞻收益。
-- 汇总回撤仅观察期末，缺期不可称连续五年净值；当前前端显示单期比较，跨期函数未扩展成五年仪表盘。
-- Langfuse/外部OpenTelemetry导出、Redis缓存、真实供应商成本与吞吐基线未实现/未测；本地持久审计可用。不存在凭空性能提升百分比。
-- schema v1为加锁bootstrap，后续结构变更仍需显式版本迁移。预算是每worker进程；多进程需分配供应商总配额。
-
-## 后续基线测量流程
-
-同一输入bundle/模型/策略/硬件下，每种消融至少运行三次，保留任务ID、墙钟总时间、每股票graph延迟、供应商返回tokens、重试/失败、checkpoint复用数、DB claim延迟、有效股票/周期覆盖；分别报告冷启动与恢复结果。没有真实调用时只报告离线工程时间，不推算实际LLM成本或投资提升。版本/许可证选择见 [REUSE_REGISTER](REUSE_REGISTER.md)。
-
-## CI-only 后续交付（2026-10-08）
-
-新增 `.github/workflows/ci.yml`、`scripts/ci/docker_check.sh`、`scripts/ci/compose_smoke.py`、`tests/test_ci.py` 和 [CI运行说明](CI.md)。工作流覆盖Python测试、前端构建、Linux Docker镜像与Compose/API/Worker/PostgreSQL集成；失败收集日志、上传证据、返回非零。聚合CI verdict只在全部真实job成功时认定该SHA的Linux容器VERIFIED。此前本地开发命令继续可用，无需安装Docker Desktop。
-
-CI执行状态：**VERIFIED（Linux，SHA5aad5e0cbf2f587485214553a45f7d17238cc538）**。用户提供GitHub仓库后，已上传独立分支并创建[PR#1](https://github.com/pogacar03/FinAgent/pull/1)，[push CI](https://github.com/pogacar03/FinAgent/actions/runs/37791876438)与[PR CI](https://github.com/pogacar03/FinAgent/actions/runs/37791940279)均success；Python113项通过、前端、Docker构建、Compose真实集成和CI verdict通过。实际PG有20报告/20checkpoint threads/84审计。详见[CI_RESULT](CI_RESULT.json)。**Mac本地仍UNVERIFIED/未执行**；本地mock/E2E未用于替代容器证据。核心业务源码、前端源码、现有Dockerfiles/Compose/Makefile未改，按本轮开始前后SHA256比较确认。最新追加测试证据和复审见执行日志；上文98项是原交付时的历史测试结果。
+DEMO价格、财务、名单、交易日历和收益路径均为SYNTHETIC。缺SA原名单保持UNAVAILABLE；历史LLM知识污染无法证明消除；单NVDA pilot没有补齐另外九只，不等同完整真实Top-10工作流。schema v1为加锁bootstrap，未来结构变动仍需版本迁移；LLM预算是每worker进程。第一阶段全部原始审查/测试记录见agent_reports与EXECUTION_LOG。

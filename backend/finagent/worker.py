@@ -11,6 +11,7 @@ from .contracts import (RunRequest, BacktestRequest, ResearchResult, FrozenSigna
                         BenchmarkList, Mode, PITStatus, UniverseSnapshot, ResearchInput, VersionBundle, stable_hash)
 from .storage import Store, LeaseLost, utcnow
 from .config import execution_context
+from .observability import trace_scope
 
 
 def decision_time(period: str) -> datetime:
@@ -89,6 +90,16 @@ class Worker:
         return True
 
     async def _execute(self, lease: dict):
+        parent_run = lease['payload'].get('run_id', lease['id'])
+        with trace_scope('Plan', batch_id=parent_run, run_id=lease['id'],
+                         resumed=lease['attempts'] > 1, attempts=lease['attempts']):
+            await self._execute_inner(lease)
+            self.store.event(lease['id'], 'State', {
+                'resumed': lease['attempts'] > 1,
+                'recovery_result': self.store.get(lease['id'])['status'],
+                'attempts': lease['attempts']})
+
+    async def _execute_inner(self, lease: dict):
         if lease['kind'] == 'RUN':
             await self._research(lease)
         elif lease['kind'] == 'BACKTEST':
@@ -136,9 +147,18 @@ class Worker:
         sem = asyncio.Semaphore(self.concurrency)
         async with checkpoint_saver(self.checkpoint_url) as saver:
             async def one(candidate):
+                input_ = indexed[candidate.ticker]
+                with trace_scope('State', ticker=candidate.ticker,
+                                 snapshot_id=input_.evidence.snapshot_id,
+                                 snapshot_hash=input_.evidence.content_hash):
+                    return await one_work(candidate)
+
+            async def one_work(candidate):
                 async with sem:
                     saved = self.store.research(run_id, candidate.ticker)
                     if saved:
+                        self.store.event(run_id, 'State', {'ticker': candidate.ticker,
+                            'cache_hit': True, 'resumed': True, 'recovery_result': 'REUSED_RESEARCH'})
                         return ResearchResult.model_validate(saved)
                     input_ = indexed[candidate.ticker]
                     thread_id = ':'.join((run_id, candidate.ticker, input_.evidence.content_hash,
@@ -158,11 +178,13 @@ class Worker:
                         phase_map = {'Planning': 'Plan', 'Tool Execution': 'Tools', 'State Management': 'State',
                                      'Evidence Verification': 'Evidence', 'Result Synthesis': 'Output'}
                         allowed = {'phase', 'status', 'attempt', 'latency_ms', 'error_code', 'prompt_tokens',
-                                   'completion_tokens', 'total_tokens', 'persona_count', 'snapshot_hash'}
+                                   'completion_tokens', 'total_tokens', 'persona_count', 'snapshot_hash',
+                                   'llm_latency_ms', 'llm_called', 'usage_source', 'retry_count'}
                         for channel in ('audit_validation', 'audit_value', 'audit_growth', 'audit_conservative'):
                             for span in values.get(channel, []):
                                 safe = {k: v for k, v in span.items() if k in allowed}
-                                safe.update(ticker=candidate.ticker, checkpoint_id=checkpoint.checkpoint['id'],
+                                safe.update(retry_count=max(0, safe.get('attempt', 1)-1),
+                                            ticker=candidate.ticker, checkpoint_id=checkpoint.checkpoint['id'],
                                             thread_id=identity, channel=channel)
                                 self.store.event(run_id, phase_map.get(span.get('phase'), 'State'), safe)
                     self.store.event(run_id, 'Evidence', {'ticker': candidate.ticker, 'snapshot_id': input_.evidence.snapshot_id,

@@ -202,7 +202,13 @@ class Store:
                     revisions[0] if revisions else None)
 
     def event(self, run_id: str, phase: str, details: dict) -> None:
-        # Only controlled metadata, never environment, credentials or raw prompts.
+        # Observability is best effort; persistence retains its original semantics.
+        try:
+            from .observability import record_event
+            correlation = record_event(phase, {**details, 'run_id': run_id})
+        except Exception:
+            correlation = {}
+        details = {**details, **correlation}
         with self.engine.begin() as c:
             c.execute(insert(audit).values(id=str(uuid4()), run_id=run_id, phase=phase,
                                          timestamp=utcnow().timestamp(), metadata=encoded(details)))

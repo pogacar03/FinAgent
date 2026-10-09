@@ -20,6 +20,7 @@ from langgraph.graph import END, START, StateGraph
 from pydantic import ValidationError
 
 from . import quant
+from .observability import trace_scope
 from .contracts import (Assumption, Mode, Persona, PersonaReport, PITStatus,
                         ResearchInput, ResearchMode, ResearchResult, stable_hash)
 
@@ -248,12 +249,20 @@ async def real_generator(inp: ResearchInput, persona: Persona, context: PrivateC
     async def operation() -> dict[str, Any]:
         try:
             async with httpx.AsyncClient(timeout=18) as client:
-                response = await budget.request(
-                    lambda: client.post(base + '/chat/completions',
-                        headers={'Authorization': 'Bearer ' + key},
-                        json={'model': model, 'messages': context.messages,
-                              'response_format': {'type': 'json_object'}, 'temperature': 0}),
-                    context)
+                async def measured_post():
+                    started = time.monotonic()
+                    try:
+                        with trace_scope('Tools', llm_called=True, usage_source='PROVIDER',
+                                         model_version=model):
+                            return await client.post(base + '/chat/completions',
+                                headers={'Authorization': 'Bearer ' + key},
+                                json={'model': model, 'messages': context.messages,
+                                      'response_format': {'type': 'json_object'}, 'temperature': 0})
+                    finally:
+                        context.audit.append({'phase': 'Tool Execution', 'status': 'LLM_REQUEST',
+                            'llm_called': True, 'usage_source': 'PROVIDER',
+                            'llm_latency_ms': round((time.monotonic()-started)*1000, 3)})
+                response = await budget.request(measured_post, context)
         except (httpx.TimeoutException, httpx.NetworkError):
             raise TransientToolError('LLM_TRANSPORT_TRANSIENT') from None
         if response.status_code == 429 or response.status_code >= 500:
@@ -264,9 +273,9 @@ async def real_generator(inp: ResearchInput, persona: Persona, context: PrivateC
             envelope = response.json()
             payload = json.loads(envelope['choices'][0]['message']['content'])
             usage = envelope.get('usage', {})
-            context.audit.append({'phase': 'Result Synthesis', 'status': 'MODEL_RETURNED',
+            context.audit.append({'phase': 'Result Synthesis', 'status': 'MODEL_RETURNED', 'usage_source': 'PROVIDER',
                                   **{k: v for k, v in usage.items() if k in
-                                     ('prompt_tokens', 'completion_tokens', 'total_tokens') and isinstance(v, int)}})
+                                     ('prompt_tokens', 'completion_tokens', 'total_tokens') and isinstance(v, int) and not isinstance(v, bool) and v >= 0}})
             allowed = {'assumptions', 'evidence_ids', 'rationale', 'risk_flags', 'abstain_reason'}
             if not isinstance(payload, dict) or set(payload) - allowed:
                 raise ValueError('invalid schema')

@@ -78,6 +78,27 @@ def database_evidence(run_id: str, bt_id: str) -> dict:
     return value
 
 
+def trace_evidence(raw: str, run_id: str) -> dict:
+    rows = [json.loads(line) for line in raw.splitlines() if line.strip()]
+    rows = [row for row in rows if row.get('attributes', {}).get('run_id') == run_id]
+    stages = {'Task Planning', 'Tool Calling', 'State Management',
+              'Evidence Verification', 'Result Expression'}
+    by_trace = {}
+    for row in rows:
+        by_trace.setdefault(row['trace_id'], []).append(row)
+    full = next((items for items in by_trace.values()
+                 if stages <= {item['name'] for item in items}), None)
+    if not full:
+        raise RuntimeError('No complete five-stage actual worker trace')
+    linked = [row for row in full if all(row.get('attributes', {}).get(key)
+               for key in ('batch_id', 'run_id', 'ticker', 'snapshot_id', 'checkpoint_id'))]
+    if not linked or any(any(value is not None for value in row['llm_metrics'].values()) for row in full):
+        raise RuntimeError('Trace correlation missing or DEMO invents LLM metrics')
+    return {'status': 'PASSED', 'label': 'ACTUAL_SDK_DEMO_NO_LLM',
+            'trace_id': full[0]['trace_id'], 'span_count': len(full),
+            'stages': sorted({row['name'] for row in full}), 'sample': linked[0]}
+
+
 def run_checks(api: str, frontend: str) -> dict:
     health = request(api, '/api/health')
     if health.get('status') != 'ok' or health.get('database') != 'postgresql':
@@ -120,10 +141,12 @@ def run_checks(api: str, frontend: str) -> dict:
     if request(api, '/api/runs/' + run_id)['result']['signal'] != run['result']['signal']:
         raise RuntimeError('Frozen signal changed across worker restart')
     db = database_evidence(run_id, bt_id)
+    traces = trace_evidence(compose('exec', '-T', 'worker', 'cat',
+                                   '/tmp/finagent-traces/worker.jsonl'), run_id)
     check_worker_state(compose('ps', '--all', '--format', 'json', 'worker'))
     return {'status': 'CHECKS_PASSED', 'label': 'DEMO / SYNTHETIC', 'commit': os.getenv('GITHUB_SHA'),
             'github_run_id': os.getenv('GITHUB_RUN_ID'), 'run_id': run_id, 'backtest_id': bt_id,
-            'database': 'postgresql', 'durable_evidence': db, 'picks': 10, 'personas': 3,
+            'database': 'postgresql', 'durable_evidence': db, 'observability': traces, 'picks': 10, 'personas': 3,
             'worker_restart': True, 'frontend_proxy': True, 'seeking_alpha_status': 'UNAVAILABLE',
             'entry_session': bt['entry_session'], 'exit_session': bt['exit_session']}
 

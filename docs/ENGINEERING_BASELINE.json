@@ -1,0 +1,148 @@
+{
+  "baseline_sha": "1bcedb6fc8374a09748d26fbb10b6e4ff5537c21",
+  "baseline_author": "Yu <110685896+pogacar03@users.noreply.github.com>",
+  "baseline_fresh_pytest": "113 passed in 6.20s",
+  "original_test_count": 98,
+  "ci_guard_test_count": 15,
+  "test_files": {
+    "tests/test_agents.py": {
+      "baseline_sha256": "0b2416de664c3cb3e20e4306688ac4550cd9bd842b05694f80f997d5ff647765",
+      "unchanged": true
+    },
+    "tests/test_api_contract.py": {
+      "baseline_sha256": "a9bb174c54ab18dd24ee60a84e4f2523e971624996fa9bb9829464ea0af540f6",
+      "unchanged": true
+    },
+    "tests/test_api_e2e.py": {
+      "baseline_sha256": "1efca761d184d678bcc9f26ccb322ad4fff5a8b80a8b093b8182776d64f83a24",
+      "unchanged": true
+    },
+    "tests/test_backtest.py": {
+      "baseline_sha256": "b3c95036fb69bda2bfafa1d5e59f62861973d709cb798af6253f8f4094393343",
+      "unchanged": true
+    },
+    "tests/test_benchmark_api.py": {
+      "baseline_sha256": "877431ab6d973b00e9195166120179f778995ddc4cdd3337aa7af525f0e7d2b3",
+      "unchanged": true
+    },
+    "tests/test_ci.py": {
+      "baseline_sha256": "3d92bd461f739dd8e88579139f65c0136ef670518f26bb99e4b334719a48410a",
+      "unchanged": true
+    },
+    "tests/test_contracts.py": {
+      "baseline_sha256": "0c140a287a071933db376d3156bea0c6c7067bbb137ecb138fd2c6bbe28a614d",
+      "unchanged": true
+    },
+    "tests/test_data.py": {
+      "baseline_sha256": "dfebd5e005d99c181a2b5f840c97b661e3032d2eac2ae32a7dff92dbdc23ecf9",
+      "unchanged": true
+    },
+    "tests/test_quant.py": {
+      "baseline_sha256": "e981058a75ab67fd443b3103c5ec89a0860b163e457adebe90566b511e287eab",
+      "unchanged": true
+    },
+    "tests/test_real_execution.py": {
+      "baseline_sha256": "d001d8629acac1c21612a728a12e3d21b16ee5e2c14ed25323858e0958c2fc41",
+      "unchanged": true
+    },
+    "tests/test_storage.py": {
+      "baseline_sha256": "6bf46f0b8f40b8462b902f3dc540cf72d4624cd1b6522694abd7e1d30974abf1",
+      "unchanged": true
+    },
+    "tests/test_worker_recovery.py": {
+      "baseline_sha256": "7459922ebbb319bc6b1c1de697160f6dc981bb8509a438a20087e55ecce36332",
+      "unchanged": true
+    }
+  },
+  "frozen_domain_files": {
+    "backend/finagent/api.py": {
+      "sha256": "b421698142dd65f7256c471499bd609a41b87977d36ab7e0f7911c2edb2c1b59",
+      "unchanged": true
+    },
+    "backend/finagent/backtest.py": {
+      "sha256": "b25c776b9f82e5197cdfbf59aea54ea099d0628f43a27f808248731956273a79",
+      "unchanged": true
+    },
+    "backend/finagent/config.py": {
+      "sha256": "ddc2d388cd2fce2eb4b24b09d42f40f8994dd8d3d17d41d848bfdeb20d602042",
+      "unchanged": true
+    },
+    "backend/finagent/contracts.py": {
+      "sha256": "0bb4d27850172e42dae2eb2b7d971d0ec770e8432f03dcc91142b5427aed8a34",
+      "unchanged": true
+    },
+    "backend/finagent/data.py": {
+      "sha256": "ce15fa8ac0f126fe4defdaae2815841cd5b0bd528dba37f42af65a068b207105",
+      "unchanged": true
+    },
+    "backend/finagent/quant.py": {
+      "sha256": "0bc14a7860983623336145698fa663605b7d9bcddc2cbf18ce269921323e386f",
+      "unchanged": true
+    },
+    "frontend/.gitignore": {
+      "sha256": "f99ead27b34cbc6756d707e7e7ee7340eb9a71e02dfec2b40d5fb848dd3f4d4f",
+      "unchanged": true
+    },
+    "frontend/Dockerfile": {
+      "sha256": "2faa3a09b63327dd14b5b91e5315099093d0390dcb535a9de3b17bbf3cc00fff",
+      "unchanged": true
+    },
+    "frontend/index.html": {
+      "sha256": "a9d53c5be0c5670dd2d6d245d0ee155552a2992b06a82100ac203bd658de16f8",
+      "unchanged": true
+    },
+    "frontend/nginx.conf": {
+      "sha256": "23e65430441e24a4703a45cf11d20c5d5ef14c9a38a3a1494b4c60e56554e913",
+      "unchanged": true
+    },
+    "frontend/package-lock.json": {
+      "sha256": "2135f0f406994f3819fb0107c014e29e81aba12969dce06d59938e029ccf7662",
+      "unchanged": true
+    },
+    "frontend/package.json": {
+      "sha256": "c296f51ad46a7967c8a7f0c9ef2b5fc1ebec183236a80176c35c191e4ddfa772",
+      "unchanged": true
+    },
+    "frontend/scripts/check-benchmark-provenance.mjs": {
+      "sha256": "ae0a1638c5d4b15a44afd92b83b3fbb74f73e72aee6fd6c71e266cca979de917",
+      "unchanged": true
+    },
+    "frontend/src/App.tsx": {
+      "sha256": "b93342f9c9018819a8a9bb10a0e3df465c84a1b1d1f032fa9d072cdb6a1052b0",
+      "unchanged": true
+    },
+    "frontend/src/api.ts": {
+      "sha256": "eaaa90774f0262a254a990900151f793549438f703b4356431c7ea1459921c78",
+      "unchanged": true
+    },
+    "frontend/src/benchmarkProvenance.ts": {
+      "sha256": "cb55a47a9edea7bbb595e424307c744c8fdd414202d77d73de1bd519319387d6",
+      "unchanged": true
+    },
+    "frontend/src/main.tsx": {
+      "sha256": "240903a71d5933c9b6910e054295ec4551c18803cd024ad6ef6d52134d96202a",
+      "unchanged": true
+    },
+    "frontend/src/styles.css": {
+      "sha256": "698549fef654433fa08d426f4ea96d933ecc68a919ca57cab06ad2cb0bb957ba",
+      "unchanged": true
+    },
+    "frontend/src/vite-env.d.ts": {
+      "sha256": "6600001f6b9e18657b3314fdcf2fad48d4f74bfafb27fc464bb57ce670cb8ec8",
+      "unchanged": true
+    },
+    "frontend/tsconfig.json": {
+      "sha256": "226ebea188ff37c2c11a7074c9bd853a1a594be4612263d855aef5baf396a2f9",
+      "unchanged": true
+    },
+    "frontend/tsconfig.node.json": {
+      "sha256": "07bdc51948ad0534b06e7765c536f88abfaa969c49aa555d42c6e950973c5b96",
+      "unchanged": true
+    },
+    "frontend/vite.config.ts": {
+      "sha256": "d6ad22e4a84db9af60f87b7e3dd5551d1d56e5682772cff4f6db8fb2f26b2208",
+      "unchanged": true
+    }
+  },
+  "author_policy": "Authenticated GitHub account only; no invented local author"
+}
