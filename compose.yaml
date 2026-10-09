@@ -27,6 +27,11 @@ services:
       LLM_CONCURRENCY: ${LLM_CONCURRENCY:-3}
       LLM_MIN_INTERVAL_SECONDS: ${LLM_MIN_INTERVAL_SECONDS:-0.2}
       SEC_USER_AGENT: ${SEC_USER_AGENT:-}
+      FINAGENT_TRACE_PATH: /tmp/finagent-traces/worker.jsonl
+      FINAGENT_LANGFUSE_ENABLED: ${FINAGENT_LANGFUSE_ENABLED:-false}
+      LANGFUSE_BASE_URL: ${LANGFUSE_BASE_URL:-https://cloud.langfuse.com}
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
     volumes:
       - ./data:/data:ro
     ports: ["8000:8000"]

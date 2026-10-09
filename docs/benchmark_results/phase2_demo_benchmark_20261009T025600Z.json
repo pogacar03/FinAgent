@@ -1,0 +1,1849 @@
+{
+  "artifact_paths": {
+    "csv": "/Users/yu/Desktop/FinAgent/finagent_codex_starter/docs/benchmark_results/phase2_demo_benchmark_20261009T025600Z.csv",
+    "json": "/Users/yu/Desktop/FinAgent/finagent_codex_starter/docs/benchmark_results/phase2_demo_benchmark_20261009T025600Z.json"
+  },
+  "failures": [],
+  "metadata": {
+    "benchmark_name": "finagent-local-demo-worker-e2e",
+    "benchmark_version": "1",
+    "completed_at_utc": "2026-10-09T02:56:11.829595+00:00",
+    "cpu_count": 8,
+    "data_class": "DEMO_SYNTHETIC",
+    "dependencies": {
+      "fastapi": "0.142.4",
+      "finagent": null,
+      "httpx": "0.28.1",
+      "langgraph": "1.2.14",
+      "langgraph-checkpoint-sqlite": "3.1.1",
+      "opentelemetry-api": "1.45.1",
+      "opentelemetry-exporter-http-transport": "0.66b1",
+      "opentelemetry-exporter-otlp-common": "0.66b1",
+      "opentelemetry-exporter-otlp-proto-common": "1.45.1",
+      "opentelemetry-exporter-otlp-proto-http": "1.45.1",
+      "opentelemetry-proto": "1.45.1",
+      "opentelemetry-sdk": "1.45.1",
+      "pydantic": "2.13.5",
+      "sqlalchemy": "2.1.4"
+    },
+    "execution_environment_hash": "9dad12d5d3eac466b456981e16478a9b0cc77695968fae67e4ed7a25fbeb33db",
+    "expected_observation_count": 18,
+    "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+    "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+    "machine": "arm64",
+    "model_kind": "deterministic DEMO generator; no LLM calls",
+    "model_version": "deterministic-demo-v1",
+    "observability": {
+      "langfuse_credentials_present": false,
+      "langfuse_endpoint_hash": null,
+      "langfuse_remote_enabled_flag": false,
+      "langfuse_remote_exporter_configured": false,
+      "local_jsonl_exporter": "enabled",
+      "local_trace_path_mode": "DEFAULT",
+      "otel_worker_instrumentation": "enabled"
+    },
+    "platform": "macOS-15.3.2-arm64-arm-64bit",
+    "python": "3.11.14 (main, Oct  9 2025, 16:16:55) [Clang 17.0.0 (clang-1700.0.13.3)]",
+    "python_implementation": "CPython",
+    "real_llm_benchmark": "UNVERIFIED",
+    "repetitions_per_scenario_strategy": 3,
+    "repository": {
+      "commit": "1bcedb6fc8374a09748d26fbb10b6e4ff5537c21",
+      "worktree_dirty": true
+    },
+    "request_body": {
+      "idempotency_key": "phase2-demo-e2e-benchmark-v1",
+      "max_candidates": 10,
+      "max_per_sector": 4,
+      "mode": "DEMO",
+      "period": "2025-H2",
+      "research_mode": "multi_persona",
+      "safety_margin": 0.2
+    },
+    "research_mode": "multi_persona",
+    "scenario_definitions": {
+      "cold_start": "fresh SQLiteStore and native SQLite checkpoint; API submit then actual Worker run_once",
+      "completed_job_cache_reuse": "actual completed RUN submitted again with same idempotency key; measures API replay only",
+      "worker_recovery": "interrupt after a ticker result is persisted; wait for lease expiry; restart Worker on the same DB/checkpoint"
+    },
+    "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+    "source_content_hashes": {
+      "backend/finagent/__init__.py": "7dba29e71c0443d661a641ddf84946882c2844598a94abcf32c985d75fb81685",
+      "backend/finagent/agents.py": "7a5d7cf09f2ff3d4f3ff135b32d77c3e72bbda9c798a75a9bbf1f3b47539a56c",
+      "backend/finagent/api.py": "b421698142dd65f7256c471499bd609a41b87977d36ab7e0f7911c2edb2c1b59",
+      "backend/finagent/backtest.py": "b25c776b9f82e5197cdfbf59aea54ea099d0628f43a27f808248731956273a79",
+      "backend/finagent/config.py": "ddc2d388cd2fce2eb4b24b09d42f40f8994dd8d3d17d41d848bfdeb20d602042",
+      "backend/finagent/contracts.py": "0bb4d27850172e42dae2eb2b7d971d0ec770e8432f03dcc91142b5427aed8a34",
+      "backend/finagent/data.py": "ce15fa8ac0f126fe4defdaae2815841cd5b0bd528dba37f42af65a068b207105",
+      "backend/finagent/migrate.py": "fcf1cbdc95e0f87c3829c3fbd8e7a8973fd7e3c36e9ac317b8347820c87ad625",
+      "backend/finagent/observability.py": "72106f05d1d26e94e4961ce54c6175b8eb2aa8053e7948a3dd8c187802da728f",
+      "backend/finagent/quant.py": "0bc14a7860983623336145698fa663605b7d9bcddc2cbf18ce269921323e386f",
+      "backend/finagent/real_pilot.py": "744a5af2dbe8fde3a2dc249f4806e4c6777aca35d9b72f0c715815297304d428",
+      "backend/finagent/storage.py": "6e32bfde20c7e71c8f02e0bd19cc4882c2b854e75be67ba27daf5b796e4482c3",
+      "backend/finagent/worker.py": "7e69ec8bd135fdc1f9de09f7cbed4201a0feedf8833b74f94022e25737bc725b",
+      "scripts/benchmark_e2e.py": "1e5d449cf061a114ee567f2b60e06caa37691f8223f8f002cc13d379b439d5ea",
+      "scripts/ci/compose_smoke.py": "dda890e3616770e771d6d76cf3cdec8dfdf93469aac3d6685974c97cb1e6d4ce",
+      "scripts/ci/docker_check.sh": "93cde0b5011cebd8e01ed228c56993c916b38856864aa395e8d6b15f33600e69",
+      "scripts/e2e_demo.py": "7a732cff8a05244e51bb397fa0c67d1ef13ccd44c1fe4982390f07d91f62111f",
+      "scripts/postgres_smoke.py": "a7a3ae94772ee11567532259fb8caa61e06f964350098632d14e9a957e5873d5",
+      "scripts/real_data_pilot.py": "d8bd68740fac68cf21be82c2dd8f3d6b7454f3f7ea98c7c6d3f7a65f4d10905f"
+    },
+    "source_tree_sha256": "06d440f14ccb5f51d5e882fa509df6ca117fabc624f408dbd8af8326ab2b9b79",
+    "sqlite_library_version": "3.53.0",
+    "started_at_utc": "2026-10-09T02:56:00.891574+00:00",
+    "status": "PASSED",
+    "strategies": [
+      {
+        "name": "serial",
+        "worker_concurrency": 1
+      },
+      {
+        "name": "bounded_parallel_3",
+        "worker_concurrency": 3
+      }
+    ],
+    "versions": {
+      "assumptions": "valuation-v1",
+      "graph": "personas-v1",
+      "model": "deterministic-demo-v1",
+      "prompt": "evidence-only-v1",
+      "strategy": "semiannual-v1"
+    }
+  },
+  "observations": [
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-5d86-67fe-8004-9f60a932ebdb"
+        ],
+        "COST": [
+          "1f1c38cf-5e7d-6b80-8004-f903b506c60b"
+        ],
+        "GOOGL": [
+          "1f1c38cf-5dbc-6e62-8004-ee569b2d0f44"
+        ],
+        "META": [
+          "1f1c38cf-5df7-68a0-8004-88ffdf2ce0b6"
+        ],
+        "NEE": [
+          "1f1c38cf-5c20-6842-8004-86e3ed636e55"
+        ],
+        "NVDA": [
+          "1f1c38cf-5e3f-6862-8004-b5fd90293366"
+        ],
+        "PLD": [
+          "1f1c38cf-5c97-660e-8004-558472c5afae"
+        ],
+        "TSLA": [
+          "1f1c38cf-5cd2-66b4-8004-b94098ded36c"
+        ],
+        "UNH": [
+          "1f1c38cf-5c5c-6432-8004-cb597172e6ab"
+        ],
+        "XOM": [
+          "1f1c38cf-5d14-6dd4-8004-c1b125a0125a"
+        ]
+      },
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "persisted_research_count": 10,
+      "repetition": 1,
+      "research_mode": "multi_persona",
+      "run_id": "e23e18bd-f1ca-4c70-87e8-4282224a8b5d",
+      "scenario": "cold_start",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "serial",
+      "submitted_status": "QUEUED",
+      "timing_scope": "fresh store/checkpoint initialization + HTTP API submission + actual Worker execution + status verification",
+      "wall_time_ms": 454.578,
+      "worker_attempts": 1,
+      "worker_concurrency": 1,
+      "worker_wall_time_ms": 424.44
+    },
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-6150-6006-8004-7f842b92de02"
+        ],
+        "COST": [
+          "1f1c38cf-62b9-6f0a-8004-a0c3418d6d31"
+        ],
+        "GOOGL": [
+          "1f1c38cf-61ef-6c50-8004-3d7f1fa802b8"
+        ],
+        "META": [
+          "1f1c38cf-623e-61b6-8004-fec9696dcc8a"
+        ],
+        "NEE": [
+          "1f1c38cf-6086-6666-8004-35af877ce33d"
+        ],
+        "NVDA": [
+          "1f1c38cf-6244-6048-8004-5a5e56688411"
+        ],
+        "PLD": [
+          "1f1c38cf-609c-63e4-8004-d3c4669b932c"
+        ],
+        "TSLA": [
+          "1f1c38cf-613a-633c-8004-f01de2692298"
+        ],
+        "UNH": [
+          "1f1c38cf-6096-6f48-8004-2b4aadcb56b6"
+        ],
+        "XOM": [
+          "1f1c38cf-614a-6be2-8004-8e1885f987d1"
+        ]
+      },
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "persisted_research_count": 10,
+      "repetition": 1,
+      "research_mode": "multi_persona",
+      "run_id": "1b16f642-2cfa-4e9d-a21e-d97ea942479f",
+      "scenario": "cold_start",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "bounded_parallel_3",
+      "submitted_status": "QUEUED",
+      "timing_scope": "fresh store/checkpoint initialization + HTTP API submission + actual Worker execution + status verification",
+      "wall_time_ms": 445.676,
+      "worker_attempts": 1,
+      "worker_concurrency": 3,
+      "worker_wall_time_ms": 424.486
+    },
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-65b4-67b4-8004-8e96a79f262c"
+        ],
+        "COST": [
+          "1f1c38cf-66df-68f0-8004-758733695028"
+        ],
+        "GOOGL": [
+          "1f1c38cf-6655-633a-8004-bda744a1e7f0"
+        ],
+        "META": [
+          "1f1c38cf-6666-6658-8004-138f02c97e72"
+        ],
+        "NEE": [
+          "1f1c38cf-64e9-61c2-8004-52f0120fcb43"
+        ],
+        "NVDA": [
+          "1f1c38cf-666b-6c2a-8004-38c831256da3"
+        ],
+        "PLD": [
+          "1f1c38cf-64f7-6380-8004-9f3239380b06"
+        ],
+        "TSLA": [
+          "1f1c38cf-659e-6d24-8004-7536c8d08741"
+        ],
+        "UNH": [
+          "1f1c38cf-64f2-6056-8004-810cf14453d9"
+        ],
+        "XOM": [
+          "1f1c38cf-65af-608e-8004-4ec86274a7e2"
+        ]
+      },
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "persisted_research_count": 10,
+      "repetition": 2,
+      "research_mode": "multi_persona",
+      "run_id": "352cc1e5-d055-4509-93c6-471d3b170922",
+      "scenario": "cold_start",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "bounded_parallel_3",
+      "submitted_status": "QUEUED",
+      "timing_scope": "fresh store/checkpoint initialization + HTTP API submission + actual Worker execution + status verification",
+      "wall_time_ms": 436.452,
+      "worker_attempts": 1,
+      "worker_concurrency": 3,
+      "worker_wall_time_ms": 412.074
+    },
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-6a49-66bc-8004-92bbcef76369"
+        ],
+        "COST": [
+          "1f1c38cf-6b40-64bc-8004-1091ce361b09"
+        ],
+        "GOOGL": [
+          "1f1c38cf-6a82-64da-8004-052ae2328eaa"
+        ],
+        "META": [
+          "1f1c38cf-6aba-6dbc-8004-8a1d2828f683"
+        ],
+        "NEE": [
+          "1f1c38cf-6912-6e9c-8004-6306c1515dfb"
+        ],
+        "NVDA": [
+          "1f1c38cf-6b05-6074-8004-9eaeb8d28c14"
+        ],
+        "PLD": [
+          "1f1c38cf-698d-617e-8004-acdbca570087"
+        ],
+        "TSLA": [
+          "1f1c38cf-69c8-6bac-8004-7201e0fe9117"
+        ],
+        "UNH": [
+          "1f1c38cf-6950-6e18-8004-49fbe20096b1"
+        ],
+        "XOM": [
+          "1f1c38cf-6a0f-62f0-8004-4b27aea90667"
+        ]
+      },
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "persisted_research_count": 10,
+      "repetition": 2,
+      "research_mode": "multi_persona",
+      "run_id": "6ac3b54d-288c-4211-9135-570682a19cc7",
+      "scenario": "cold_start",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "serial",
+      "submitted_status": "QUEUED",
+      "timing_scope": "fresh store/checkpoint initialization + HTTP API submission + actual Worker execution + status verification",
+      "wall_time_ms": 455.66,
+      "worker_attempts": 1,
+      "worker_concurrency": 1,
+      "worker_wall_time_ms": 434.855
+    },
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-6e90-689c-8004-87f959adceb0"
+        ],
+        "COST": [
+          "1f1c38cf-6f81-622e-8004-763b554f97da"
+        ],
+        "GOOGL": [
+          "1f1c38cf-6ec9-6e9e-8004-7176e1d694ab"
+        ],
+        "META": [
+          "1f1c38cf-6f02-6c4e-8004-e1c17170c55f"
+        ],
+        "NEE": [
+          "1f1c38cf-6d62-6e7a-8004-1e07d7b4f19b"
+        ],
+        "NVDA": [
+          "1f1c38cf-6f45-6ea4-8004-952c15162a50"
+        ],
+        "PLD": [
+          "1f1c38cf-6dd5-6556-8004-c41a2ccc1358"
+        ],
+        "TSLA": [
+          "1f1c38cf-6e0d-66c2-8004-b0f8eca6e43d"
+        ],
+        "UNH": [
+          "1f1c38cf-6d9c-6b20-8004-220b721cecd4"
+        ],
+        "XOM": [
+          "1f1c38cf-6e58-63d4-8004-19c71523aef3"
+        ]
+      },
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "persisted_research_count": 10,
+      "repetition": 3,
+      "research_mode": "multi_persona",
+      "run_id": "00b3a621-e903-4f2c-bd8e-5666f493bdcf",
+      "scenario": "cold_start",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "serial",
+      "submitted_status": "QUEUED",
+      "timing_scope": "fresh store/checkpoint initialization + HTTP API submission + actual Worker execution + status verification",
+      "wall_time_ms": 445.565,
+      "worker_attempts": 1,
+      "worker_concurrency": 1,
+      "worker_wall_time_ms": 423.871
+    },
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-7260-65d0-8004-cd8fd5fd059b"
+        ],
+        "COST": [
+          "1f1c38cf-73d2-61c0-8004-0ae965188b7b"
+        ],
+        "GOOGL": [
+          "1f1c38cf-7347-614c-8004-436a3e2580c8"
+        ],
+        "META": [
+          "1f1c38cf-7358-63fc-8004-65acbb8740b3"
+        ],
+        "NEE": [
+          "1f1c38cf-71a5-64b0-8004-be9598bde648"
+        ],
+        "NVDA": [
+          "1f1c38cf-735e-614e-8004-d84008ebe5ab"
+        ],
+        "PLD": [
+          "1f1c38cf-71b2-6e08-8004-4157a4fe3a46"
+        ],
+        "TSLA": [
+          "1f1c38cf-7252-6ef8-8004-4a6929343373"
+        ],
+        "UNH": [
+          "1f1c38cf-71ad-6ae8-8004-8ad8d2439de7"
+        ],
+        "XOM": [
+          "1f1c38cf-725b-61e8-8004-d768006f3fee"
+        ]
+      },
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "persisted_research_count": 10,
+      "repetition": 3,
+      "research_mode": "multi_persona",
+      "run_id": "686f0311-864b-42e8-b0a1-78eaf41bb714",
+      "scenario": "cold_start",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "bounded_parallel_3",
+      "submitted_status": "QUEUED",
+      "timing_scope": "fresh store/checkpoint initialization + HTTP API submission + actual Worker execution + status verification",
+      "wall_time_ms": 451.574,
+      "worker_attempts": 1,
+      "worker_concurrency": 3,
+      "worker_wall_time_ms": 429.368
+    },
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-76e5-65c4-8004-15847cc30d5c"
+        ],
+        "COST": [
+          "1f1c38cf-77d9-676e-8004-be6bfa580728"
+        ],
+        "GOOGL": [
+          "1f1c38cf-771c-6c04-8004-20819664d24f"
+        ],
+        "META": [
+          "1f1c38cf-7752-66ec-8004-86a4617e631f"
+        ],
+        "NEE": [
+          "1f1c38cf-75c1-6a26-8004-58bad956ff2d"
+        ],
+        "NVDA": [
+          "1f1c38cf-77a0-6e8c-8004-2b5ff54b1c00"
+        ],
+        "PLD": [
+          "1f1c38cf-7634-6242-8004-bf294fd2c49e"
+        ],
+        "TSLA": [
+          "1f1c38cf-766c-6868-8004-8cd94a9ae926"
+        ],
+        "UNH": [
+          "1f1c38cf-75fb-6582-8004-3182e5aef384"
+        ],
+        "XOM": [
+          "1f1c38cf-76ae-6fce-8004-f621f55e1e6d"
+        ]
+      },
+      "completed_result_present": true,
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "original_completed_job_id": "bb71d5aa-d485-4e5e-8558-f5ed3722f3eb",
+      "preparation_wall_time_ms": 416.354,
+      "repetition": 1,
+      "replay_status": "COMPLETED",
+      "replayed_job_id": "bb71d5aa-d485-4e5e-8558-f5ed3722f3eb",
+      "replayed_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "research_mode": "multi_persona",
+      "same_completed_job_reused": true,
+      "scenario": "completed_job_cache_reuse",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "snapshot_identity_unchanged": true,
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "serial",
+      "timing_scope": "second HTTP API submission returning the same already-COMPLETED idempotent job; excludes first execution setup",
+      "wall_time_ms": 1.153,
+      "worker_attempts": 1,
+      "worker_concurrency": 1
+    },
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-7aeb-6e8e-8004-670d99125710"
+        ],
+        "COST": [
+          "1f1c38cf-7c0f-6996-8004-1e72a091d7c2"
+        ],
+        "GOOGL": [
+          "1f1c38cf-7b8b-6394-8004-fd0fbb69e61f"
+        ],
+        "META": [
+          "1f1c38cf-7b9b-65d2-8004-02d23b5e78a9"
+        ],
+        "NEE": [
+          "1f1c38cf-7a2f-6888-8004-520123d16689"
+        ],
+        "NVDA": [
+          "1f1c38cf-7ba0-697e-8004-4e3c81cda5ec"
+        ],
+        "PLD": [
+          "1f1c38cf-7a44-6bf2-8004-b52fc407ab91"
+        ],
+        "TSLA": [
+          "1f1c38cf-7ade-6bda-8004-a67c05cc27ff"
+        ],
+        "UNH": [
+          "1f1c38cf-7a3f-63fa-8004-92403a176271"
+        ],
+        "XOM": [
+          "1f1c38cf-7ae7-60d2-8004-e112e0584bbf"
+        ]
+      },
+      "completed_result_present": true,
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "original_completed_job_id": "bd69a570-0984-4bfd-8502-cceb423fdd0d",
+      "preparation_wall_time_ms": 429.151,
+      "repetition": 1,
+      "replay_status": "COMPLETED",
+      "replayed_job_id": "bd69a570-0984-4bfd-8502-cceb423fdd0d",
+      "replayed_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "research_mode": "multi_persona",
+      "same_completed_job_reused": true,
+      "scenario": "completed_job_cache_reuse",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "snapshot_identity_unchanged": true,
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "bounded_parallel_3",
+      "timing_scope": "second HTTP API submission returning the same already-COMPLETED idempotent job; excludes first execution setup",
+      "wall_time_ms": 1.205,
+      "worker_attempts": 1,
+      "worker_concurrency": 3
+    },
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-7f3f-68f0-8004-6d510da9e0db"
+        ],
+        "COST": [
+          "1f1c38cf-807a-6940-8004-e8c00791cdb3"
+        ],
+        "GOOGL": [
+          "1f1c38cf-7fed-6e1e-8004-ace26cd15fd2"
+        ],
+        "META": [
+          "1f1c38cf-7ff7-6914-8004-0c5547444f6f"
+        ],
+        "NEE": [
+          "1f1c38cf-7e85-637e-8004-7c53f3ec11ab"
+        ],
+        "NVDA": [
+          "1f1c38cf-7ffd-65a8-8004-12812bc14745"
+        ],
+        "PLD": [
+          "1f1c38cf-7e92-6c86-8004-7fa50cdbf2ba"
+        ],
+        "TSLA": [
+          "1f1c38cf-7f29-6b7c-8004-6d3489325f5b"
+        ],
+        "UNH": [
+          "1f1c38cf-7e8d-688a-8004-ae9659f8b598"
+        ],
+        "XOM": [
+          "1f1c38cf-7f3a-6382-8004-a28ebad42a0a"
+        ]
+      },
+      "completed_result_present": true,
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "original_completed_job_id": "96cd4f5d-a96f-49fc-acaf-dfd7f1881d45",
+      "preparation_wall_time_ms": 447.828,
+      "repetition": 2,
+      "replay_status": "COMPLETED",
+      "replayed_job_id": "96cd4f5d-a96f-49fc-acaf-dfd7f1881d45",
+      "replayed_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "research_mode": "multi_persona",
+      "same_completed_job_reused": true,
+      "scenario": "completed_job_cache_reuse",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "snapshot_identity_unchanged": true,
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "bounded_parallel_3",
+      "timing_scope": "second HTTP API submission returning the same already-COMPLETED idempotent job; excludes first execution setup",
+      "wall_time_ms": 1.296,
+      "worker_attempts": 1,
+      "worker_concurrency": 3
+    },
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-8420-66f8-8004-60584c32abf0"
+        ],
+        "COST": [
+          "1f1c38cf-8573-601e-8004-5dfc03fe1778"
+        ],
+        "GOOGL": [
+          "1f1c38cf-845d-6080-8004-a9b9e5a97052"
+        ],
+        "META": [
+          "1f1c38cf-849c-6e24-8004-ea70514e9c68"
+        ],
+        "NEE": [
+          "1f1c38cf-82b3-6a18-8004-d14d81bb9d81"
+        ],
+        "NVDA": [
+          "1f1c38cf-8536-633a-8004-f670c00e6d1a"
+        ],
+        "PLD": [
+          "1f1c38cf-833a-6194-8004-f30578af1fbe"
+        ],
+        "TSLA": [
+          "1f1c38cf-8382-6dea-8004-fe43b25fc7c2"
+        ],
+        "UNH": [
+          "1f1c38cf-82f7-638a-8004-61b63be87c0d"
+        ],
+        "XOM": [
+          "1f1c38cf-83dc-6c64-8004-634d61bbbc0a"
+        ]
+      },
+      "completed_result_present": true,
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "original_completed_job_id": "b903d0fd-0d57-44cd-8a33-6ecc53201db8",
+      "preparation_wall_time_ms": 502.982,
+      "repetition": 2,
+      "replay_status": "COMPLETED",
+      "replayed_job_id": "b903d0fd-0d57-44cd-8a33-6ecc53201db8",
+      "replayed_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "research_mode": "multi_persona",
+      "same_completed_job_reused": true,
+      "scenario": "completed_job_cache_reuse",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "snapshot_identity_unchanged": true,
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "serial",
+      "timing_scope": "second HTTP API submission returning the same already-COMPLETED idempotent job; excludes first execution setup",
+      "wall_time_ms": 1.304,
+      "worker_attempts": 1,
+      "worker_concurrency": 1
+    },
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-88c5-66cc-8004-98c3db22305a"
+        ],
+        "COST": [
+          "1f1c38cf-89c1-6b8e-8004-1f67a7d42d2d"
+        ],
+        "GOOGL": [
+          "1f1c38cf-8901-6582-8004-33aa9ed78367"
+        ],
+        "META": [
+          "1f1c38cf-893d-6c80-8004-3b8981cdb0cb"
+        ],
+        "NEE": [
+          "1f1c38cf-8784-66be-8004-fc0427c1d5a6"
+        ],
+        "NVDA": [
+          "1f1c38cf-8987-6498-8004-ba208fd93e9a"
+        ],
+        "PLD": [
+          "1f1c38cf-87fd-6d84-8004-6e9c06c02313"
+        ],
+        "TSLA": [
+          "1f1c38cf-883f-618a-8004-55dab3d8da59"
+        ],
+        "UNH": [
+          "1f1c38cf-87c2-619e-8004-0c1ea10d3a78"
+        ],
+        "XOM": [
+          "1f1c38cf-8889-628a-8004-1110e3e67c58"
+        ]
+      },
+      "completed_result_present": true,
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "original_completed_job_id": "33b5c02e-e114-479a-9f94-1e70dd5586e3",
+      "preparation_wall_time_ms": 437.493,
+      "repetition": 3,
+      "replay_status": "COMPLETED",
+      "replayed_job_id": "33b5c02e-e114-479a-9f94-1e70dd5586e3",
+      "replayed_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "research_mode": "multi_persona",
+      "same_completed_job_reused": true,
+      "scenario": "completed_job_cache_reuse",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "snapshot_identity_unchanged": true,
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "serial",
+      "timing_scope": "second HTTP API submission returning the same already-COMPLETED idempotent job; excludes first execution setup",
+      "wall_time_ms": 1.327,
+      "worker_attempts": 1,
+      "worker_concurrency": 1
+    },
+    {
+      "checkpoint_ids_by_ticker": {
+        "CAT": [
+          "1f1c38cf-8d7a-6f64-8004-52255d4181a3"
+        ],
+        "COST": [
+          "1f1c38cf-8eaf-6f56-8004-3eddf8d0c1ee"
+        ],
+        "GOOGL": [
+          "1f1c38cf-8e22-607a-8004-c2dcc51b9709"
+        ],
+        "META": [
+          "1f1c38cf-8e33-646a-8004-1aa0a9b56eb9"
+        ],
+        "NEE": [
+          "1f1c38cf-8cae-65e0-8004-be3d31413898"
+        ],
+        "NVDA": [
+          "1f1c38cf-8e39-6c2a-8004-c76982810d0b"
+        ],
+        "PLD": [
+          "1f1c38cf-8cbd-6d2e-8004-161f000e2221"
+        ],
+        "TSLA": [
+          "1f1c38cf-8d6c-6fc2-8004-555d1edfae56"
+        ],
+        "UNH": [
+          "1f1c38cf-8cb8-6180-8004-9acd3fa89a8b"
+        ],
+        "XOM": [
+          "1f1c38cf-8d75-69b0-8004-7ea8244a3a29"
+        ]
+      },
+      "completed_result_present": true,
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "original_completed_job_id": "014ad178-f21c-47d8-9cca-17e2ad9c1e53",
+      "preparation_wall_time_ms": 497.271,
+      "repetition": 3,
+      "replay_status": "COMPLETED",
+      "replayed_job_id": "014ad178-f21c-47d8-9cca-17e2ad9c1e53",
+      "replayed_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "research_mode": "multi_persona",
+      "same_completed_job_reused": true,
+      "scenario": "completed_job_cache_reuse",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "snapshot_identity_unchanged": true,
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "bounded_parallel_3",
+      "timing_scope": "second HTTP API submission returning the same already-COMPLETED idempotent job; excludes first execution setup",
+      "wall_time_ms": 1.2,
+      "worker_attempts": 1,
+      "worker_concurrency": 3
+    },
+    {
+      "checkpoint_ids_after_restart_by_ticker": {
+        "CAT": [
+          "1f1c38cf-9670-631c-8004-7d75b8a065d8"
+        ],
+        "COST": [
+          "1f1c38cf-9766-637a-8004-aab8893873d1"
+        ],
+        "GOOGL": [
+          "1f1c38cf-96ac-60ce-8004-ee921b542882"
+        ],
+        "META": [
+          "1f1c38cf-96e6-66de-8004-ab41c56b00e6"
+        ],
+        "NEE": [
+          "1f1c38cf-90c2-63d4-8004-c3611290dcad"
+        ],
+        "NVDA": [
+          "1f1c38cf-9722-62f6-8004-e3ce3c1262e1"
+        ],
+        "PLD": [
+          "1f1c38cf-95ab-6044-8004-ca77ce5cb3e0"
+        ],
+        "TSLA": [
+          "1f1c38cf-95e9-6b14-8004-1493d10b3d97"
+        ],
+        "UNH": [
+          "1f1c38cf-956d-6d0c-8004-1558c5cb7226"
+        ],
+        "XOM": [
+          "1f1c38cf-9628-6210-8004-533c91c7d74b"
+        ]
+      },
+      "checkpoint_ids_before_restart_by_ticker": {
+        "NEE": [
+          "1f1c38cf-90c2-63d4-8004-c3611290dcad"
+        ]
+      },
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "interrupt_worker_status": "RUNNING",
+      "interrupted_attempt_wall_time_ms": 176.76,
+      "interrupted_tickers_entered": [
+        "UNH"
+      ],
+      "lease_wait_ms": 309.414,
+      "lease_wait_seconds_requested": 0.3082,
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "recovery_integrity_verified": true,
+      "recovery_redone_tickers": [
+        "UNH",
+        "PLD",
+        "TSLA",
+        "XOM",
+        "CAT",
+        "GOOGL",
+        "META",
+        "NVDA",
+        "COST"
+      ],
+      "redone_count": 9,
+      "repetition": 1,
+      "research_mode": "multi_persona",
+      "restart_recovery_wall_time_ms": 391.374,
+      "retained_count_after_restart": 10,
+      "retained_count_before_restart": 1,
+      "retained_tickers_after_restart": [
+        "CAT",
+        "COST",
+        "GOOGL",
+        "META",
+        "NEE",
+        "NVDA",
+        "PLD",
+        "TSLA",
+        "UNH",
+        "XOM"
+      ],
+      "retained_tickers_before_restart": [
+        "NEE"
+      ],
+      "run_id": "f6702e57-1506-4bc4-9484-92d0af2492ce",
+      "scenario": "worker_recovery",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "serial",
+      "timing_scope": "fresh store + API submission + actual interrupted Worker, lease expiry wait, new Store/Worker and completed recovery",
+      "wall_time_ms": 906.66,
+      "worker_attempts": 2,
+      "worker_concurrency": 1
+    },
+    {
+      "checkpoint_ids_after_restart_by_ticker": {
+        "CAT": [
+          "1f1c38cf-9eb8-6498-8004-06e70de0c5e0"
+        ],
+        "COST": [
+          "1f1c38cf-9f6c-601a-8004-ba39fab069e0"
+        ],
+        "GOOGL": [
+          "1f1c38cf-9ebd-67fe-8004-9f00e76a74e0"
+        ],
+        "META": [
+          "1f1c38cf-9f5e-68ac-8004-49e3ab300ae8"
+        ],
+        "NVDA": [
+          "1f1c38cf-9f66-6f98-8004-bb938cc801d3"
+        ],
+        "PLD": [
+          "1f1c38cf-9e0b-6a4a-8004-7d1992fd0281"
+        ],
+        "TSLA": [
+          "1f1c38cf-9e10-6aea-8004-312a1d480fde"
+        ],
+        "UNH": [
+          "1f1c38cf-9e03-64ee-8004-4cdfc3e67ad5"
+        ],
+        "XOM": [
+          "1f1c38cf-9eb0-60fe-8004-900f42ca18fe"
+        ]
+      },
+      "checkpoint_ids_before_restart_by_ticker": {},
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "interrupt_worker_status": "RUNNING",
+      "interrupted_attempt_wall_time_ms": 207.388,
+      "interrupted_tickers_entered": [
+        "PLD",
+        "UNH"
+      ],
+      "lease_wait_ms": 313.89,
+      "lease_wait_seconds_requested": 0.3128,
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "recovery_integrity_verified": true,
+      "recovery_redone_tickers": [
+        "UNH",
+        "PLD",
+        "TSLA",
+        "XOM",
+        "CAT",
+        "GOOGL",
+        "META",
+        "NVDA",
+        "COST"
+      ],
+      "redone_count": 9,
+      "repetition": 1,
+      "research_mode": "multi_persona",
+      "restart_recovery_wall_time_ms": 305.21,
+      "retained_count_after_restart": 10,
+      "retained_count_before_restart": 1,
+      "retained_tickers_after_restart": [
+        "CAT",
+        "COST",
+        "GOOGL",
+        "META",
+        "NEE",
+        "NVDA",
+        "PLD",
+        "TSLA",
+        "UNH",
+        "XOM"
+      ],
+      "retained_tickers_before_restart": [
+        "NEE"
+      ],
+      "run_id": "1e8e1bc8-98ab-49f0-8f35-84c849632cd7",
+      "scenario": "worker_recovery",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "bounded_parallel_3",
+      "timing_scope": "fresh store + API submission + actual interrupted Worker, lease expiry wait, new Store/Worker and completed recovery",
+      "wall_time_ms": 850.306,
+      "worker_attempts": 2,
+      "worker_concurrency": 3
+    },
+    {
+      "checkpoint_ids_after_restart_by_ticker": {
+        "CAT": [
+          "1f1c38cf-a71c-6922-8004-edc3e9e2a2b0"
+        ],
+        "COST": [
+          "1f1c38cf-a82f-6062-8004-983cbd8dae40"
+        ],
+        "GOOGL": [
+          "1f1c38cf-a722-634a-8004-7c6d90c418dd"
+        ],
+        "META": [
+          "1f1c38cf-a7be-67c2-8004-78b54151e4ab"
+        ],
+        "NVDA": [
+          "1f1c38cf-a829-6784-8004-31e8f5ab4e47"
+        ],
+        "PLD": [
+          "1f1c38cf-a645-62c4-8004-917e0638f114"
+        ],
+        "TSLA": [
+          "1f1c38cf-a64b-62aa-8004-bebc6d09b48d"
+        ],
+        "UNH": [
+          "1f1c38cf-a63c-6a02-8004-7fd622859f05"
+        ],
+        "XOM": [
+          "1f1c38cf-a714-604c-8004-cf48e28dda56"
+        ]
+      },
+      "checkpoint_ids_before_restart_by_ticker": {},
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "interrupt_worker_status": "RUNNING",
+      "interrupted_attempt_wall_time_ms": 190.385,
+      "interrupted_tickers_entered": [
+        "PLD",
+        "UNH"
+      ],
+      "lease_wait_ms": 314.727,
+      "lease_wait_seconds_requested": 0.3135,
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "recovery_integrity_verified": true,
+      "recovery_redone_tickers": [
+        "UNH",
+        "PLD",
+        "TSLA",
+        "XOM",
+        "CAT",
+        "GOOGL",
+        "META",
+        "NVDA",
+        "COST"
+      ],
+      "redone_count": 9,
+      "repetition": 2,
+      "research_mode": "multi_persona",
+      "restart_recovery_wall_time_ms": 382.958,
+      "retained_count_after_restart": 10,
+      "retained_count_before_restart": 1,
+      "retained_tickers_after_restart": [
+        "CAT",
+        "COST",
+        "GOOGL",
+        "META",
+        "NEE",
+        "NVDA",
+        "PLD",
+        "TSLA",
+        "UNH",
+        "XOM"
+      ],
+      "retained_tickers_before_restart": [
+        "NEE"
+      ],
+      "run_id": "4bf3dd7a-ffe8-4e02-a71b-3573f6ac1e52",
+      "scenario": "worker_recovery",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "bounded_parallel_3",
+      "timing_scope": "fresh store + API submission + actual interrupted Worker, lease expiry wait, new Store/Worker and completed recovery",
+      "wall_time_ms": 916.918,
+      "worker_attempts": 2,
+      "worker_concurrency": 3
+    },
+    {
+      "checkpoint_ids_after_restart_by_ticker": {
+        "CAT": [
+          "1f1c38cf-af89-69ca-8004-b29f4c071543"
+        ],
+        "COST": [
+          "1f1c38cf-b0ce-6a06-8004-cb06d9281c03"
+        ],
+        "GOOGL": [
+          "1f1c38cf-afc2-6e5a-8004-e7dfaf11d27d"
+        ],
+        "META": [
+          "1f1c38cf-affb-6188-8004-df347b7cf38f"
+        ],
+        "NEE": [
+          "1f1c38cf-aa5a-6d64-8004-abb5fe4d212b"
+        ],
+        "NVDA": [
+          "1f1c38cf-b091-6e26-8004-edca49f775fb"
+        ],
+        "PLD": [
+          "1f1c38cf-aed2-6f0e-8004-4f5005d479dd"
+        ],
+        "TSLA": [
+          "1f1c38cf-af0b-6fac-8004-773df9842178"
+        ],
+        "UNH": [
+          "1f1c38cf-ae96-6d74-8004-94a6cfd1b0ce"
+        ],
+        "XOM": [
+          "1f1c38cf-af45-65b8-8004-40dc67d92bd7"
+        ]
+      },
+      "checkpoint_ids_before_restart_by_ticker": {
+        "NEE": [
+          "1f1c38cf-aa5a-6d64-8004-abb5fe4d212b"
+        ]
+      },
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "interrupt_worker_status": "RUNNING",
+      "interrupted_attempt_wall_time_ms": 176.439,
+      "interrupted_tickers_entered": [
+        "UNH"
+      ],
+      "lease_wait_ms": 309.029,
+      "lease_wait_seconds_requested": 0.3079,
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "recovery_integrity_verified": true,
+      "recovery_redone_tickers": [
+        "UNH",
+        "PLD",
+        "TSLA",
+        "XOM",
+        "CAT",
+        "GOOGL",
+        "META",
+        "NVDA",
+        "COST"
+      ],
+      "redone_count": 9,
+      "repetition": 2,
+      "research_mode": "multi_persona",
+      "restart_recovery_wall_time_ms": 366.842,
+      "retained_count_after_restart": 10,
+      "retained_count_before_restart": 1,
+      "retained_tickers_after_restart": [
+        "CAT",
+        "COST",
+        "GOOGL",
+        "META",
+        "NEE",
+        "NVDA",
+        "PLD",
+        "TSLA",
+        "UNH",
+        "XOM"
+      ],
+      "retained_tickers_before_restart": [
+        "NEE"
+      ],
+      "run_id": "bfc4d94a-39f4-4978-ba4b-29ef716f3c88",
+      "scenario": "worker_recovery",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "serial",
+      "timing_scope": "fresh store + API submission + actual interrupted Worker, lease expiry wait, new Store/Worker and completed recovery",
+      "wall_time_ms": 878.377,
+      "worker_attempts": 2,
+      "worker_concurrency": 1
+    },
+    {
+      "checkpoint_ids_after_restart_by_ticker": {
+        "CAT": [
+          "1f1c38cf-b81a-690e-8004-49082eea3dd6"
+        ],
+        "COST": [
+          "1f1c38cf-b965-61c4-8004-45d20b8886c2"
+        ],
+        "GOOGL": [
+          "1f1c38cf-b852-6dc2-8004-bb0252f6a118"
+        ],
+        "META": [
+          "1f1c38cf-b8eb-646e-8004-fe1361373874"
+        ],
+        "NEE": [
+          "1f1c38cf-b2c8-669a-8004-61643151d2cd"
+        ],
+        "NVDA": [
+          "1f1c38cf-b925-63f8-8004-6cdfd6270ad1"
+        ],
+        "PLD": [
+          "1f1c38cf-b754-6efc-8004-8935f5b0fef6"
+        ],
+        "TSLA": [
+          "1f1c38cf-b790-6902-8004-cee46c6eec96"
+        ],
+        "UNH": [
+          "1f1c38cf-b718-6916-8004-61ee8402c22b"
+        ],
+        "XOM": [
+          "1f1c38cf-b7cb-6728-8004-d4de36c262b2"
+        ]
+      },
+      "checkpoint_ids_before_restart_by_ticker": {
+        "NEE": [
+          "1f1c38cf-b2c8-669a-8004-61643151d2cd"
+        ]
+      },
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "interrupt_worker_status": "RUNNING",
+      "interrupted_attempt_wall_time_ms": 177.2,
+      "interrupted_tickers_entered": [
+        "UNH"
+      ],
+      "lease_wait_ms": 309.175,
+      "lease_wait_seconds_requested": 0.308,
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "recovery_integrity_verified": true,
+      "recovery_redone_tickers": [
+        "UNH",
+        "PLD",
+        "TSLA",
+        "XOM",
+        "CAT",
+        "GOOGL",
+        "META",
+        "NVDA",
+        "COST"
+      ],
+      "redone_count": 9,
+      "repetition": 3,
+      "research_mode": "multi_persona",
+      "restart_recovery_wall_time_ms": 382.104,
+      "retained_count_after_restart": 10,
+      "retained_count_before_restart": 1,
+      "retained_tickers_after_restart": [
+        "CAT",
+        "COST",
+        "GOOGL",
+        "META",
+        "NEE",
+        "NVDA",
+        "PLD",
+        "TSLA",
+        "UNH",
+        "XOM"
+      ],
+      "retained_tickers_before_restart": [
+        "NEE"
+      ],
+      "run_id": "4c7bbf17-41a0-420a-ac2f-51e9bf7c85cd",
+      "scenario": "worker_recovery",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "serial",
+      "timing_scope": "fresh store + API submission + actual interrupted Worker, lease expiry wait, new Store/Worker and completed recovery",
+      "wall_time_ms": 896.735,
+      "worker_attempts": 2,
+      "worker_concurrency": 1
+    },
+    {
+      "checkpoint_ids_after_restart_by_ticker": {
+        "CAT": [
+          "1f1c38cf-c102-631e-8004-0321731c9b5a"
+        ],
+        "COST": [
+          "1f1c38cf-c1b9-697e-8004-cb9cc1f8c68b"
+        ],
+        "GOOGL": [
+          "1f1c38cf-c107-65da-8004-f6705bf0fcb3"
+        ],
+        "META": [
+          "1f1c38cf-c1a4-6056-8004-d253069f3151"
+        ],
+        "NVDA": [
+          "1f1c38cf-c1b4-6366-8004-e792e7a80b95"
+        ],
+        "PLD": [
+          "1f1c38cf-bfe8-6bb8-8004-3cfca56dbafb"
+        ],
+        "TSLA": [
+          "1f1c38cf-bfee-6068-8004-851a24baacd7"
+        ],
+        "UNH": [
+          "1f1c38cf-bfd8-6ccc-8004-84e21dd7621c"
+        ],
+        "XOM": [
+          "1f1c38cf-c0fa-61e6-8004-2376deb6c2df"
+        ]
+      },
+      "checkpoint_ids_before_restart_by_ticker": {},
+      "input_hash": "d08097b75bac6c5a4e4dde81a65cf78fd08a54dbf96d6ba55ae2009c522dc828",
+      "interrupt_worker_status": "RUNNING",
+      "interrupted_attempt_wall_time_ms": 166.864,
+      "interrupted_tickers_entered": [
+        "PLD",
+        "UNH"
+      ],
+      "lease_wait_ms": 314.597,
+      "lease_wait_seconds_requested": 0.3134,
+      "llm_latency_ms": null,
+      "llm_metrics_status": "UNAVAILABLE_DEMO_NO_LLM_CALLS",
+      "llm_tokens": null,
+      "model_version": "deterministic-demo-v1",
+      "recovery_integrity_verified": true,
+      "recovery_redone_tickers": [
+        "UNH",
+        "PLD",
+        "TSLA",
+        "XOM",
+        "CAT",
+        "GOOGL",
+        "META",
+        "NVDA",
+        "COST"
+      ],
+      "redone_count": 9,
+      "repetition": 3,
+      "research_mode": "multi_persona",
+      "restart_recovery_wall_time_ms": 385.314,
+      "retained_count_after_restart": 10,
+      "retained_count_before_restart": 1,
+      "retained_tickers_after_restart": [
+        "CAT",
+        "COST",
+        "GOOGL",
+        "META",
+        "NEE",
+        "NVDA",
+        "PLD",
+        "TSLA",
+        "UNH",
+        "XOM"
+      ],
+      "retained_tickers_before_restart": [
+        "NEE"
+      ],
+      "run_id": "aea3e3a1-8038-4752-911c-89770fea53d5",
+      "scenario": "worker_recovery",
+      "semantic_input_hash": "37e599e162730510852053b448d8b525f807b57e627ee11fb40e57621af08cca",
+      "source_snapshot_hashes_by_ticker": {
+        "AAPL": "63f182127c62d150620eec0367badfd5775364a394d16588263f43f903fd8e34",
+        "AMZN": "ed104e8489c3a57b3c6c26f2e1581500903e8794488bb1e678b44d979bd59764",
+        "AVGO": "4e602128733158d948dc53ff3e5ce5274765ec18b72caae999a00309d80eb1e4",
+        "BABA": "1f376e75b0731fbdcaf0e73c2d8fdac46ff51b6c300b44012a711d9ada35e737",
+        "BRK.B": "18113fa9dc7085d0264eb6849a954cebcc6f7d1754897e240d63bab4ff24532c",
+        "CAT": "645e2d0f974e0460fc732d037f101790192f3837f15068526fa0c3a10daf0250",
+        "COST": "5b8e775492c7ab420b3f43024d0bc15ae4ee73e995f3aa69c600d41bb9aa6515",
+        "GOOGL": "d7e2512b76333d2a9b40aeef95c1f45bd4790fce9af1f0914238490289eb573f",
+        "JPM": "0340bba9a86a0e40697202168b8a756976f67d424c5a0c1e8d6df67d0a0fac94",
+        "LLY": "1986cd780e959980f02f93222a9ac1c5a350e047f0fcda54dcb66c7f0d0b289e",
+        "META": "b736204217a3f57e090a9b0c48c0b122d36767e0e6ae2d52068eb304864d07aa",
+        "MSFT": "d09192f3433e5273e84611a8b67f123391a561cfb8715c6882ec6450940b50b0",
+        "NEE": "049b3e3825195dfa7c36d49226a955dde958677fe321b37f2f289484a93fbdf1",
+        "NVDA": "ef4f915da7fa44e5c8412033b63d04c86dd1b3efa61eded960b4355763d9f8f3",
+        "PLD": "2588ea8925d1c8e3b55b1250f036a44dba1a79732f3ab7bd9d95730358d6ffe3",
+        "SPY": "6bc165c90d1ad14ce1c441b511fe9ad7d94f3ea4562b93da282fa66a051cb10b",
+        "TSLA": "d8a183dcd9039d766d238c61014b27d075e804eba60c3c637c979d9c110ecd05",
+        "TSM": "61d1cb8498708fbf687c80020b2c1f9256e1d77801bdf924aaa2cf58ef6b66c1",
+        "UNH": "d726543136bf0ccfa6bc19b1b9cf011b205a65734d8af2ffd80652ba51ec1a4f",
+        "WMT": "aae3544bfec40d4fddce37aabc6345d263426c5e01c7c128bb5a131ddf6d5fa3",
+        "XOM": "acf519e009e877b6aed7622e04d40ddbb34a96c86ab84a1e93c8a118c6b09d8a"
+      },
+      "source_snapshot_hashes_digest": "bb768b0f125e8c0abd537bf67abaaa2ba1f2ecbb3a4eb3d005406c800f940841",
+      "status": "COMPLETED",
+      "strategy": "bounded_parallel_3",
+      "timing_scope": "fresh store + API submission + actual interrupted Worker, lease expiry wait, new Store/Worker and completed recovery",
+      "wall_time_ms": 893.976,
+      "worker_attempts": 2,
+      "worker_concurrency": 3
+    }
+  ],
+  "summary": {
+    "benchmark_claim_scope": "DEMO implementation throughput/replay/recovery only; real LLM performance UNVERIFIED",
+    "by_scenario_and_strategy": {
+      "cold_start": {
+        "bounded_parallel_3": {
+          "completed_repetitions": 3,
+          "interpretation": "DEMO-only descriptive observation; not an LLM or investment-performance metric",
+          "wall_time_ms_max": 451.574,
+          "wall_time_ms_median": 445.676,
+          "wall_time_ms_min": 436.452
+        },
+        "serial": {
+          "completed_repetitions": 3,
+          "interpretation": "DEMO-only descriptive observation; not an LLM or investment-performance metric",
+          "wall_time_ms_max": 455.66,
+          "wall_time_ms_median": 454.578,
+          "wall_time_ms_min": 445.565
+        }
+      },
+      "completed_job_cache_reuse": {
+        "bounded_parallel_3": {
+          "completed_repetitions": 3,
+          "interpretation": "DEMO-only descriptive observation; not an LLM or investment-performance metric",
+          "wall_time_ms_max": 1.296,
+          "wall_time_ms_median": 1.205,
+          "wall_time_ms_min": 1.2
+        },
+        "serial": {
+          "completed_repetitions": 3,
+          "interpretation": "DEMO-only descriptive observation; not an LLM or investment-performance metric",
+          "wall_time_ms_max": 1.327,
+          "wall_time_ms_median": 1.304,
+          "wall_time_ms_min": 1.153
+        }
+      },
+      "worker_recovery": {
+        "bounded_parallel_3": {
+          "completed_repetitions": 3,
+          "interpretation": "DEMO-only descriptive observation; not an LLM or investment-performance metric",
+          "lease_wait_ms_median": 314.597,
+          "redone_count": [
+            9,
+            9,
+            9
+          ],
+          "restart_recovery_ms_median": 382.958,
+          "retained_count_before_restart": [
+            1,
+            1,
+            1
+          ],
+          "wall_time_ms_max": 916.918,
+          "wall_time_ms_median": 893.976,
+          "wall_time_ms_min": 850.306
+        },
+        "serial": {
+          "completed_repetitions": 3,
+          "interpretation": "DEMO-only descriptive observation; not an LLM or investment-performance metric",
+          "lease_wait_ms_median": 309.175,
+          "redone_count": [
+            9,
+            9,
+            9
+          ],
+          "restart_recovery_ms_median": 382.104,
+          "retained_count_before_restart": [
+            1,
+            1,
+            1
+          ],
+          "wall_time_ms_max": 906.66,
+          "wall_time_ms_median": 896.735,
+          "wall_time_ms_min": 878.377
+        }
+      }
+    },
+    "failure_count": 0,
+    "raw_observation_count": 18,
+    "serial_vs_bounded": {
+      "cold_start": {
+        "bounded_parallel_3_median_ms": 445.676,
+        "comparison_status": "OBSERVED_DEMO_ONLY",
+        "serial_median_divided_by_bounded_median": 1.02,
+        "serial_median_ms": 454.578,
+        "serial_minus_bounded_median_ms": 8.902
+      },
+      "completed_job_cache_reuse": {
+        "bounded_parallel_3_median_ms": 1.205,
+        "comparison_status": "OBSERVED_DEMO_ONLY",
+        "serial_median_divided_by_bounded_median": 1.0822,
+        "serial_median_ms": 1.304,
+        "serial_minus_bounded_median_ms": 0.099
+      },
+      "worker_recovery": {
+        "bounded_parallel_3_median_ms": 893.976,
+        "comparison_status": "OBSERVED_DEMO_ONLY",
+        "serial_median_divided_by_bounded_median": 1.0031,
+        "serial_median_ms": 896.735,
+        "serial_minus_bounded_median_ms": 2.759
+      }
+    }
+  }
+}

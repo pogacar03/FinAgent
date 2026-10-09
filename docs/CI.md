@@ -35,7 +35,7 @@
 4. `compose_smoke.py` 通过实际容器API确认PostgreSQL后端，检查已构建nginx页面与API代理。
 5. 停Worker→提交DEMO研究→确认QUEUED→启动容器Worker→等待COMPLETED；验收10个唯一标的、3角色、原生检查点审计。
 6. 再停/启Worker执行回测，确认冻结信号不变、半年同窗口、合成标签、SA不可用。
-7. 用容器内 `psql -v ON_ERROR_STOP=1` 核对真实数据库任务状态、研究报告、Universe工件、至少10个原生checkpoint thread及审计；确认Worker仍running。
+7. 用容器内 `psql -v ON_ERROR_STOP=1` 核对真实数据库任务状态、研究报告、Universe工件、至少10个原生checkpoint thread及审计；从实际Worker容器读取SDK JSONL，验证同一trace的五阶段及batch/run/ticker/snapshot/checkpoint关联、DEMO LLM指标null；确认Worker仍running。
 
 健康检查有超时，终止状态或数据库/业务断言失败会抛异常并返回非零，不使用 `continue-on-error` 掩盖失败。脚本不启动本地替代API/worker，不安装Mac Docker。
 
@@ -45,7 +45,7 @@
 
 `Upload container logs and integration evidence` 使用 `if: always()` 上传 `artifacts/docker-ci/`，保留7天：
 
-- `integration.json`：仅完整集成断言通过时生成，记录真实run_id、backtest_id、提交SHA、GitHub run_id和数据库证据；状态为CHECKS_PASSED，最终CI成功仍须看CI verdict。
+- `integration.json`：仅完整集成断言通过时生成，记录真实run_id、backtest_id、提交SHA、GitHub run_id和数据库证据和实际五阶段SDK trace样例；状态为CHECKS_PASSED，最终CI成功仍须看CI verdict。
 - `compose-ps.json`、`compose.log`、`cleanup.log`：容器状态、运行日志、清理结果。
 
 Python job上传JUnit和E2E报告。未生成报告不会伪造成功文件。Runner被强制终止时trap/artifact可能无法执行；GitHub job仍失败/取消，不能标记VERIFIED。
@@ -79,3 +79,10 @@ gh run download <RUN_ID> --name docker-evidence-<RUN_ID>-<RUN_ATTEMPT>
 研究run `68cfcdc0-af49-4080-b3a9-39e00501a138`，回测 `c6ac6f4d-e891-42b2-8af8-c902223c0aee`。真实容器PG保存20份研究、20个原生checkpoint thread、84条审计、1份Universe；10只冻结名单、3角色、worker重启、nginx代理、同窗合成回测均通过。push/PR两次运行均成功；PR使用GitHub测试merge SHA，与head SHA分别记录。容器日志/清理/JSON artifact已上传，7天保留。
 
 手动触发默认分支要求见[GitHub官方说明](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)。已下载实际Docker artifact，SHA256与GitHub元数据相符，ZIP包含compose状态、容器日志、清理日志与integration.json；实际清理成功。
+
+
+## 第二阶段实际Linux结果（2026-10-09）
+
+源码提交`2d65d868c3c74a782f99147c1feac6323c109a70`：[push37877192941](https://github.com/pogacar03/FinAgent/actions/runs/37877192941)、[PR37877216469](https://github.com/pogacar03/FinAgent/actions/runs/37877216469)均四job success。Linux pytest **149 passed in 10.78s**，前端tsc/Vite，Docker构建和Compose完整集成均通过。真实PG20报告/20checkpoint threads/85审计；research run `9515ebbf-9c01-427a-94ca-5769115c6139`，SDK trace `4b6ff7dc67124033fdc8f724ff5bb4f3` 105 spans，五阶段同trace且checkpoint/snapshot/ticker关联，DEMO LLM指标null。
+
+下载Docker artifact11592966272并核对ZIP SHA256 `508087fdeb26e4252516bc963d29f368d77a9a2dca5b2e1faa737b4c5945e730`；内含相同提交integration.json及容器状态/日志/成功清理。字段及样例见[PHASE2_CI_RESULT](PHASE2_CI_RESULT.json)。新源码通过不代表真实Langfuse服务或市场PIT通过；Mac Docker仍未执行。

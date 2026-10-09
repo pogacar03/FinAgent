@@ -7,6 +7,7 @@ export COMPOSE_PROJECT_NAME="finagent-ci-${GITHUB_RUN_ID:-local}-${GITHUB_RUN_AT
 export CI_ARTIFACT_DIR="${CI_ARTIFACT_DIR:-$ROOT/artifacts/docker-ci}"
 export LLM_API_KEY='' BENCHMARK_IMPORT_TOKEN='' SEC_USER_AGENT=''
 export POSTGRES_PASSWORD=ci_ephemeral_only
+export FINAGENT_LANGFUSE_ENABLED=false LANGFUSE_PUBLIC_KEY='' LANGFUSE_SECRET_KEY=''
 mkdir -p "$CI_ARTIFACT_DIR"
 compose=(docker compose -f "$ROOT/compose.yaml")
 finish() {

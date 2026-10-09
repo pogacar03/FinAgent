@@ -98,3 +98,24 @@ cd ..
 ## 可测量的工程指标
 
 用同一数据/模式/硬件重复运行，记录整体耗时、每 ticker graph 延迟、P95、重试和失败数、恢复时复用数量、DB claim 时间与覆盖股票数。LLM 成本与 tokens 仅使用供应商返回的实际统计；不从假定价格或估计 token 编造改进率。投资比较要公开有效期数、缺失期数和原始来源，不把缺期资金曲线称为连续五年结果。
+
+## 第二阶段：真实数据、追踪与性能复验
+
+无需Mac Docker。更新锁定依赖后执行：
+
+```bash
+uv pip install --python .venv/bin/python -r requirements.lock
+.venv/bin/python -m pytest -q
+PYTHONPATH=backend .venv/bin/python scripts/real_data_pilot.py
+# 对采集输出的 execution_record 路径无网络重放
+PYTHONPATH=backend .venv/bin/python scripts/real_data_pilot.py --replay <execution_record>
+.venv/bin/python scripts/benchmark_e2e.py
+```
+
+真实pilot固定NVDA与2025-02-28纽约时点。已取得原始财务公告；正式估值和半年总回报仍UNAVAILABLE，缺失PIT与行动覆盖不补齐。PE政策结果仅是假设算术。详细来源和真实执行记录见[REAL_DATA_VALIDATION](docs/REAL_DATA_VALIDATION.md)。
+
+Worker默认向`artifacts/traces/worker.jsonl`写实际OpenTelemetry SDK spans，并在DB审计关联trace_id；可通过`FINAGENT_TRACE_PATH`改路径。`.env.example`列出可选Langfuse配置；失败按既定fail-open继续业务。在线服务和真实LLM指标尚未验证，字段和真实本地样例见[OBSERVABILITY](docs/OBSERVABILITY.md)。Compose traces位于容器`/tmp/finagent-traces/worker.jsonl`，容器删除后不保留；CI在删除前验收并保存关联样例。
+
+[Benchmark](docs/BENCHMARK.md)保留每组至少3次的原始JSON/CSV；冷启动、完成任务HTTP幂等复用、真实Worker中断恢复均为DEMO，无真实LLM调用。当前完整离线测试149项。新提交的Linux容器验收遵循[CI](docs/CI.md)，以目标SHA实际结果为准。
+
+第二阶段源码Linux CI已实际通过：[push验收](https://github.com/pogacar03/FinAgent/actions/runs/37877192941)，完整证据[PHASE2_CI_RESULT](docs/PHASE2_CI_RESULT.json)。改动在[Draft PR#2](https://github.com/pogacar03/FinAgent/pull/2)，依赖已有基线PR#1。真实数据与Langfuse外部状态仍按STATUS单独报告。
